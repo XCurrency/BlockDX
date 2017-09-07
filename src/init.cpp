@@ -32,7 +32,7 @@
 #include "util.h"
 #include "utilmoneystr.h"
 #include "validationinterface.h"
-#include "xbridge/xbridgeapp.h"
+
 #ifdef ENABLE_WALLET
 #include "db.h"
 #include "wallet.h"

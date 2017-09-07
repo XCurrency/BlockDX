@@ -13,7 +13,6 @@
 #include "rpcserver.h"
 #include "ui_interface.h"
 #include "util.h"
-#include "xbridge/xbridgeapp.h"
 
 #include <boost/algorithm/string/predicate.hpp>
 #include <boost/filesystem.hpp>

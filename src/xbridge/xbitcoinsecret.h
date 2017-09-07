@@ -1,4 +1,0 @@
-#ifndef XBITCOINSECRET_H
-#define XBITCOINSECRET_H
-
-#endif // XBITCOINSECRET_H

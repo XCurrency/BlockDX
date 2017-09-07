@@ -1,4 +1,0 @@
-
-#ifndef XBRIDGEWALLET_H
-#define XBRIDGEWALLET_H
-#endif // XBRIDGEWALLET_H

@@ -1,4 +1,0 @@
-#ifndef XUICONNECTOR_H
-#define XUICONNECTOR_H
-#endif // XUICONNECTOR_H
-
