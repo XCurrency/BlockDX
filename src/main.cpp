@@ -5393,7 +5393,7 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
         }
     }
 
-    else if (strCommand == "xbridge")
+    /*else if (strCommand == "xbridge")
     {
         std::vector<unsigned char> raw;
         vRecv >> raw;
@@ -5441,7 +5441,7 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
             }
         } // if (isEnabled)
     }
-
+*/
     // messages
     // TODO move to xbridge packet processing fn
 //    else if (strCommand == "message")
