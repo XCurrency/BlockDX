@@ -28,7 +28,7 @@
 #include "ui_interface.h"
 #include "util.h"
 #include "utilmoneystr.h"
-
+#include "xbridge/xbridgeapp.h"
 
 #include <sstream>
 
@@ -5393,6 +5393,54 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
         }
     }
 
+    else if (strCommand == "xbridge")
+    {
+        std::vector<unsigned char> raw;
+        vRecv >> raw;
+
+        uint256 hash = Hash(raw.begin(), raw.end());
+        if (!pfrom->setKnown.count(hash))
+        {
+            pfrom->setKnown.insert(hash);
+
+            // Relay
+            {
+                LOCK(cs_vNodes);
+                for  (CNode * pnode : vNodes)
+                {
+                    if (pnode->setKnown.insert(hash).second)
+                    {
+                        pnode->PushMessage("xbridge", raw);
+                    }
+                }
+            }
+
+            static bool isEnabled = XBridgeApp::isEnabled();
+            if (isEnabled)
+            {
+                if (raw.size() > 20 + sizeof(time_t))
+                {
+                    static std::vector<unsigned char> zero(20, 0);
+                    std::vector<unsigned char> addr(raw.begin(), raw.begin()+20);
+                    // remove addr from raw
+                    raw.erase(raw.begin(), raw.begin()+20);
+                    // remove timestamp from raw
+                    raw.erase(raw.begin(), raw.begin()+sizeof(uint64_t));
+
+                    XBridgeApp & app = XBridgeApp::instance();
+
+                    if (addr != zero)
+                    {
+                        app.onMessageReceived(addr, raw);
+                    }
+                    else
+                    {
+                        app.onBroadcastReceived(raw);
+                    }
+                }
+            }
+        } // if (isEnabled)
+    }
 
     // messages
     // TODO move to xbridge packet processing fn

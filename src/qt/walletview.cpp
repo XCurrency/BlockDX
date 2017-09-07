@@ -22,8 +22,8 @@
 #include "transactionview.h"
 #include "walletmodel.h"
 
-
-
+#include "xbridge/xbridgeapp.h"
+#include "xbridgeui/xbridgetransactionsview.h"
 
 #include "ui_interface.h"
 
@@ -52,8 +52,8 @@ WalletView::WalletView(QWidget* parent) : QStackedWidget(parent),
     // create messages dialog
     // messagesPage = new MessagesDialog(this);
 
-
-
+    // xbridge page
+    xbridgePage = new XBridgeTransactionsView(this);
 
     vbox->addWidget(transactionView);
     QPushButton* exportButton = new QPushButton(tr("&Export"), this);
@@ -88,6 +88,10 @@ WalletView::WalletView(QWidget* parent) : QStackedWidget(parent),
     addWidget(sendCoinsPage);
     addWidget(explorerWindow);
 
+    if (XBridgeApp::isEnabled())
+    {
+        addWidget(xbridgePage);
+    }
 
     QSettings settings;
     if (settings.value("fShowServicenodesTab").toBool()) {
@@ -210,6 +214,10 @@ void WalletView::gotoHistoryPage()
     setCurrentWidget(transactionsPage);
 }
 
+void WalletView::gotoXBridgePage()
+{
+    setCurrentWidget(xbridgePage);
+}
 
 
 void WalletView::gotoBlockExplorerPage()
