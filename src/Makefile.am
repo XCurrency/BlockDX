@@ -32,7 +32,7 @@ LIBBITCOIN_CRYPTO=crypto/libbitcoin_crypto.a
 LIBBITCOIN_UNIVALUE=univalue/libbitcoin_univalue.a
 LIBBITCOINQT=qt/libbitcoinqt.a
 LIBSECP256K1=secp256k1/libsecp256k1.la
-LIBXBRIDGE_XBRIDGE=libxbridge_xbridge.a
+
 
 $(LIBSECP256K1): $(wildcard secp256k1/src/*) $(wildcard secp256k1/include/*)
 	$(AM_V_at)$(MAKE) $(AM_MAKEFLAGS) -C $(@D) $(@F)
@@ -44,7 +44,6 @@ EXTRA_LIBRARIES = \
   libbitcoin_util.a \
   libbitcoin_common.a \
   univalue/libbitcoin_univalue.a \
-  libxbridge_xbridge.a \
   libbitcoin_server.a \
   libbitcoin_cli.a
 
@@ -340,51 +339,6 @@ libbitcoin_common_a_SOURCES = \
   spork.cpp \
   $(BITCOIN_CORE_H)
 
-#libxbridge_xbridge_a_CPPFLAGS = $(BITCOIN_INCLUDES) $(MINIUPNPC_CPPFLAGS)
-libxbridge_xbridge_a_CPPFLAGS =  $(BITCOIN_INCLUDES)
-libxbridge_xbridge_a_SOURCES = \
-  xbridge/util/settings.cpp \
-  xbridge/util/logger.cpp \
-  xbridge/util/txlog.cpp \
-  xbridge/util/xutil.cpp \
-  xbridge/bitcoinrpcconnector.cpp \
-  xbridge/xbridge.cpp \
-  xbridge/xbridgeapp.cpp \
-  xbridge/xbridgeexchange.cpp \
-  xbridge/xbridgesession.cpp \
-  xbridge/xbridgesessionbtc.cpp \
-  xbridge/xbridgetransaction.cpp \
-  xbridge/xbridgetransactionmember.cpp \
-  xbridge/xkey.cpp \
-  xbridge/xpubkey.cpp \
-  xbridge/xbitcoinaddress.cpp \
-  xbridge/xbitcoinsecret.cpp \
-  xbridge/xbitcointransaction.cpp \
-  xbridge/rpcxbridge.cpp \
-  xbridge/bitcoinrpcconnector.h \
-  xbridge/config.h \
-  xbridge/version.h \
-  xbridge/xbitcoinaddress.h \
-  xbridge/xbitcoinsecret.h \
-  xbridge/xbitcointransaction.h \
-  xbridge/xbridge.h \
-  xbridge/xbridgeapp.h \
-  xbridge/xbridgeexchange.h \
-  xbridge/xbridgepacket.h \
-  xbridge/xbridgerpc.h \
-  xbridge/xbridgesession.h \
-  xbridge/xbridgesessionbtc.h \
-  xbridge/xbridgetransaction.h \
-  xbridge/xbridgetransactiondescr.h \
-  xbridge/xbridgetransactionmember.h \
-  xbridge/xbridgewallet.h \
-  xbridge/xkey.h \
-  xbridge/xpubkey.h \
-  xbridge/xuiconnector.h \
-  xbridge/util/logger.h \
-  xbridge/util/settings.h \
-  xbridge/util/txlog.h \
-  xbridge/util/xutil.h \
   $(BITCOIN_CORE_H)
 
 
@@ -435,7 +389,6 @@ blocknetdxd_LDADD = \
   $(LIBLEVELDB) \
   $(LIBMEMENV) \
   $(LIBSECP256K1) \
-  $(LIBXBRIDGE_XBRIDGE) \
   $(LIBBITCOIN_CLI)
 
 if ENABLE_ZMQ
