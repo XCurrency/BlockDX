@@ -8,7 +8,7 @@
 #if defined(HAVE_CONFIG_H)
 #include "config/blocknetdx-config.h"
 #endif
-
+#include "config/blocknetdx-config.h"
 #include <stdint.h>
 
 #include "compat/byteswap.h"
