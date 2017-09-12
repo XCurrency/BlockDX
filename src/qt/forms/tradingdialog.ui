@@ -442,7 +442,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>Buy BLOCK</string>
+      <string>Buy XC</string>
      </property>
      <property name="icon">
       <iconset resource="../blocknetdx.qrc">
@@ -1751,10 +1751,10 @@
       </rect>
      </property>
      <property name="text">
-      <string>Sell BLOCK</string>
+      <string>Sell XC</string>
      </property>
      <property name="icon">
-      <iconset resource="../blocknetdx">
+      <iconset resource="../blocknetdx.qrc">
        <normaloff>:/icons/bitcoin</normaloff>:/icons/bitcoin</iconset>
      </property>
     </widget>
@@ -1763,7 +1763,7 @@
       <rect>
        <x>22</x>
        <y>12</y>
-       <width>258</width>
+       <width>266</width>
        <height>19</height>
       </rect>
      </property>
@@ -1777,7 +1777,7 @@
          </font>
         </property>
         <property name="text">
-         <string>BLOCK Available:</string>
+         <string>XC Available:</string>
         </property>
        </widget>
       </item>
@@ -2221,7 +2221,7 @@
          </font>
         </property>
         <property name="text">
-         <string>BLOCK</string>
+         <string>XC</string>
         </property>
        </widget>
       </item>
@@ -2762,7 +2762,7 @@
       </font>
      </property>
      <property name="text">
-      <string>BLOCK Balance:</string>
+      <string>XC Balance:</string>
      </property>
     </widget>
     <widget class="QLabel" name="label_12">
@@ -2813,7 +2813,7 @@
       </font>
      </property>
      <property name="text">
-      <string>BLOCK Available:</string>
+      <string>XC Available:</string>
      </property>
     </widget>
     <widget class="QLabel" name="label_14">
@@ -2832,7 +2832,7 @@
       </font>
      </property>
      <property name="text">
-      <string>BLOCK Pending:</string>
+      <string>XC Pending:</string>
      </property>
     </widget>
     <widget class="QLabel" name="BLOCKPendingLabel">
@@ -2928,7 +2928,7 @@
       </font>
      </property>
      <property name="text">
-      <string>Bittrex BLOCK Deposit Address:</string>
+      <string>Bittrex XC Deposit Address:</string>
      </property>
     </widget>
     <widget class="QPushButton" name="GenDepositBTN">
@@ -2941,7 +2941,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>Generate Blocknetdx Deposit Address</string>
+      <string>Generate XCurrency Deposit Address</string>
      </property>
      <property name="icon">
       <iconset resource="../blocknetdx.qrc">

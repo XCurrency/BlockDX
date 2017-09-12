@@ -20,7 +20,7 @@
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>0</number>
+      <number>4</number>
      </property>
      <widget class="QWidget" name="tabMain">
       <attribute name="title">
@@ -33,7 +33,7 @@
           <string>Automatically start BlocknetDX after logging in to the system.</string>
          </property>
          <property name="text">
-          <string>&amp;Start BlocknetDX on system login</string>
+          <string>&amp;Start XCurrency on system login</string>
          </property>
         </widget>
        </item>
@@ -177,12 +177,12 @@
             <string notr="true"/>
            </property>
            <property name="text">
-            <string>Amount of BlocknetDX to keep anonymized</string>
+            <string>Amount of XCurrency to keep anonymized</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QSpinBox" name="anonymizeBlocknetdx">
+          <widget class="QSpinBox" name="anonymizeXCurrency">
            <property name="minimum">
             <number>100</number>
            </property>
@@ -476,7 +476,7 @@
          </property>
          <property name="text">
           <string>Language missing or translation incomplete? Help contributing translations here:
-https://www.transifex.com/blocknetdx-project/blocknetdx-project-translations</string>
+https://www.bla-bla.com</string>
          </property>
          <property name="wordWrap">
           <bool>true</bool>

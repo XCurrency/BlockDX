@@ -1,6 +1,6 @@
 // Copyright (c) 2011-2014 The Bitcoin developers
 // Copyright (c) 2014-2015 The Dash developers
-// Copyright (c) 2015-2017 The BlocknetDX developers
+// Copyright (c) 2015-2017 The XCurrency developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -75,11 +75,11 @@ void OptionsModel::Init()
     if (!settings.contains("nObfuscationRounds"))
         settings.setValue("nObfuscationRounds", 2);
 
-    if (!settings.contains("nAnonymizeBlocknetdxAmount"))
-        settings.setValue("nAnonymizeBlocknetdxAmount", 1000);
+    if (!settings.contains("nAnonymizeXCurrencyAmount"))
+        settings.setValue("nAnonymizeXCurrencyAmount", 1000);
 
     nObfuscationRounds = settings.value("nObfuscationRounds").toLongLong();
-    nAnonymizeBlocknetdxAmount = settings.value("nAnonymizeBlocknetdxAmount").toLongLong();
+    nAnonymizeBlocknetdxAmount = settings.value("nAnonymizeXCurrencyAmount").toLongLong();
 
     if (!settings.contains("fShowServicenodesTab"))
         settings.setValue("fShowServicenodesTab", servicenodeConfig.getCount());
@@ -146,8 +146,8 @@ void OptionsModel::Init()
 
     if (settings.contains("nObfuscationRounds"))
         SoftSetArg("-obfuscationrounds", settings.value("nObfuscationRounds").toString().toStdString());
-    if (settings.contains("nAnonymizeBlocknetdxAmount"))
-        SoftSetArg("-anonymizeblocknetdxamount", settings.value("nAnonymizeBlocknetdxAmount").toString().toStdString());
+    if (settings.contains("nAnonymizeXCurrencyAmount"))
+        SoftSetArg("-anonymizexcurrencyamount", settings.value("nAnonymizeXCurrencyAmount").toString().toStdString());
 
     language = settings.value("language").toString();
 }
@@ -339,7 +339,7 @@ bool OptionsModel::setData(const QModelIndex& index, const QVariant& value, int 
             break;
         case AnonymizeBlocknetdxAmount:
             nAnonymizeBlocknetdxAmount = value.toInt();
-            settings.setValue("nAnonymizeBlocknetdxAmount", nAnonymizeBlocknetdxAmount);
+            settings.setValue("nAnonymizeXCurrencyAmount", nAnonymizeBlocknetdxAmount);
             emit anonymizeBlocknetdxAmountChanged(nAnonymizeBlocknetdxAmount);
             break;
         case CoinControlFeatures:

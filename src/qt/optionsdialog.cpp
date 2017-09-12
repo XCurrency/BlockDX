@@ -213,15 +213,16 @@ void OptionsDialog::setMapper()
 
     /* Obfuscation Rounds */
     mapper->addMapping(ui->obfuscationRounds, OptionsModel::ObfuscationRounds);
-    mapper->addMapping(ui->anonymizeBlocknetdx, OptionsModel::AnonymizeBlocknetdxAmount);
+    mapper->addMapping(ui->anonymizeXCurrency, OptionsModel::AnonymizeBlocknetdxAmount);
     mapper->addMapping(ui->showServicenodesTab, OptionsModel::ShowServicenodesTab);
 }
 
 void OptionsDialog::enableOkButton()
 {
     /* prevent enabling of the OK button when data modified, if there is an invalid proxy address present */
-    if (fProxyIpValid)
+    if (fProxyIpValid){
         setOkButtonState(true);
+    }
 }
 
 void OptionsDialog::disableOkButton()

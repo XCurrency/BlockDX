@@ -1,6 +1,6 @@
 // Copyright (c) 2011-2014 The Bitcoin developers
 // Copyright (c) 2014-2015 The Dash developers
-// Copyright (c) 2015-2017 The BlocknetDX developers
+// Copyright (c) 2015-2017 The XCurrency developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -59,7 +59,7 @@ SendCoinsDialog::SendCoinsDialog(QWidget* parent) : QDialog(parent),
     connect(ui->splitBlockCheckBox, SIGNAL(stateChanged(int)), this, SLOT(splitBlockChecked(int)));
     connect(ui->splitBlockLineEdit, SIGNAL(textChanged(const QString&)), this, SLOT(splitBlockLineEditChanged(const QString&)));
 
-    // BlocknetDX specific
+    // XCurrency specific
     QSettings settings;
     if (!settings.contains("bUseObfuScation"))
         settings.setValue("bUseObfuScation", false);
@@ -232,7 +232,7 @@ void SendCoinsDialog::on_sendButton_clicked()
             CoinControlDialog::coinControl->fSplitBlock = false;
             ui->splitBlockCheckBox->setCheckState(Qt::Unchecked);
             QMessageBox::warning(this, tr("Send Coins"),
-                tr("The split block tool does not work when sending to outside addresses. Try again."),
+                tr("The split XC tool does not work when sending to outside addresses. Try again."),
                 QMessageBox::Ok, QMessageBox::Ok);
             return;
         }
@@ -257,7 +257,7 @@ void SendCoinsDialog::on_sendButton_clicked()
         CoinControlDialog::coinControl->fSplitBlock = false;
         ui->splitBlockCheckBox->setCheckState(Qt::Unchecked);
         QMessageBox::warning(this, tr("Send Coins"),
-            tr("The split block tool does not work with multiple addresses. Try again."),
+            tr("The split XC tool does not work with multiple addresses. Try again."),
             QMessageBox::Ok, QMessageBox::Ok);
         return;
     }
@@ -763,7 +763,7 @@ void SendCoinsDialog::updateSmartFeeLabel()
     } else {
         ui->labelSmartFee->setText(BitcoinUnits::formatWithUnit(model->getOptionsModel()->getDisplayUnit(), feeRate.GetFeePerK()) + "/kB");
         ui->labelSmartFee2->hide();
-        ui->labelFeeEstimation->setText(tr("Estimated to begin confirmation within %n block(s).", "", nBlocksToConfirm));
+        ui->labelFeeEstimation->setText(tr("Estimated to begin confirmation within %n XC(s).", "", nBlocksToConfirm));
     }
 
     updateFeeMinimizedLabel();
@@ -792,7 +792,7 @@ void SendCoinsDialog::splitBlockLineEditChanged(const QString& text)
     CAmount nAfterFee;
     ParseMoney(qAfterFee.toStdString().c_str(), nAfterFee);
 
-    //if greater than 0 then divide after fee by the amount of blocks
+    //if greater than 0 then divide after fee by the amount of XC's
     CAmount nSize = nAfterFee;
     int nBlocks = text.toInt();
     if (nAfterFee && nBlocks)
@@ -903,7 +903,7 @@ void SendCoinsDialog::coinControlChangeEdited(const QString& text)
             ui->labelCoinControlChangeLabel->setText("");
         } else if (!addr.IsValid()) // Invalid address
         {
-            ui->labelCoinControlChangeLabel->setText(tr("Warning: Invalid BlocknetDX address"));
+            ui->labelCoinControlChangeLabel->setText(tr("Warning: Invalid XCurrency address"));
         } else // Valid address
         {
             CPubKey pubkey;
