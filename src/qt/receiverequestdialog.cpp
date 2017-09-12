@@ -168,7 +168,7 @@ void ReceiveRequestDialog::update()
                     p++;
                 }
             }
-//            QRcode_free(code);
+            QRcode_free(code);
 
             ui->lblQRCode->setPixmap(QPixmap::fromImage(myImage).scaled(300, 300));
             ui->btnSaveAs->setEnabled(true);
