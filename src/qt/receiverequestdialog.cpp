@@ -148,32 +148,32 @@ void ReceiveRequestDialog::update()
     ui->outUri->setText(html);
 
 #ifdef USE_QRCODE
-    ui->lblQRCode->setText("");
-    if (!uri.isEmpty()) {
-        // limit URI length
-        if (uri.length() > MAX_URI_LENGTH) {
-            ui->lblQRCode->setText(tr("Resulting URI too long, try to reduce the text for label / message."));
-        } else {
-            QRcode* code = QRcode_encodeString(uri.toUtf8().constData(), 0, QR_ECLEVEL_L, QR_MODE_8, 1);
-            if (!code) {
-                ui->lblQRCode->setText(tr("Error encoding URI into QR Code."));
-                return;
-            }
-            QImage myImage = QImage(code->width + 8, code->width + 8, QImage::Format_RGB32);
-            myImage.fill(0xffffff);
-            unsigned char* p = code->data;
-            for (int y = 0; y < code->width; y++) {
-                for (int x = 0; x < code->width; x++) {
-                    myImage.setPixel(x + 4, y + 4, ((*p & 1) ? 0x0 : 0xffffff));
-                    p++;
-                }
-            }
-            QRcode_free(code);
+//    ui->lblQRCode->setText("");
+//    if (!uri.isEmpty()) {
+//        // limit URI length
+//        if (uri.length() > MAX_URI_LENGTH) {
+//            ui->lblQRCode->setText(tr("Resulting URI too long, try to reduce the text for label / message."));
+//        } else {
+//            QRcode* code = QRcode_encodeString(uri.toUtf8().constData(), 0, QR_ECLEVEL_L, QR_MODE_8, 1);
+//            if (!code) {
+//                ui->lblQRCode->setText(tr("Error encoding URI into QR Code."));
+//                return;
+//            }
+//            QImage myImage = QImage(code->width + 8, code->width + 8, QImage::Format_RGB32);
+//            myImage.fill(0xffffff);
+//            unsigned char* p = code->data;
+//            for (int y = 0; y < code->width; y++) {
+//                for (int x = 0; x < code->width; x++) {
+//                    myImage.setPixel(x + 4, y + 4, ((*p & 1) ? 0x0 : 0xffffff));
+//                    p++;
+//                }
+//            }
+//            QRcode_free(code);
 
-            ui->lblQRCode->setPixmap(QPixmap::fromImage(myImage).scaled(300, 300));
-            ui->btnSaveAs->setEnabled(true);
-        }
-    }
+//            ui->lblQRCode->setPixmap(QPixmap::fromImage(myImage).scaled(300, 300));
+//            ui->btnSaveAs->setEnabled(true);
+//        }
+//    }
 #endif
 }
 
