@@ -161,13 +161,14 @@ OverviewPage::OverviewPage(QWidget* parent) : QWidget(parent),
 
 void OverviewPage::handleTransactionClicked(const QModelIndex& index)
 {
-    if (filter)
+    if (filter){
         emit transactionClicked(filter->mapToSource(index));
+    }
 }
 
 OverviewPage::~OverviewPage()
 {
-    if (!fLiteMode && !fServiceNode) disconnect(timer, SIGNAL(timeout()), this, SLOT(obfuScationStatus()));
+//    if (!fLiteMode && !fServiceNode) disconnect(timer, SIGNAL(timeout()), this, SLOT(obfuScationStatus()));
     delete ui;
 }
 
