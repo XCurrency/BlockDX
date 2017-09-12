@@ -172,7 +172,7 @@ public:
             // stuck if the core is holding the locks for a longer time - for
             // example, during a wallet rescan.
             //
-            // If a status update is needed (blocks came in since last check),
+            // If a status update is needed (XCs came in since last check),
             //  update the status of this transaction from the wallet. Otherwise,
             // simply re-use the cached status.
             TRY_LOCK(cs_main, lockMain);
@@ -241,7 +241,7 @@ void TransactionTableModel::updateTransaction(const QString& hash, int status, b
 
 void TransactionTableModel::updateConfirmations()
 {
-    // Blocks came in since last poll.
+    // XCs came in since last poll.
     // Invalidate status (number of confirmations) and (possibly) description
     //  for all rows. Qt is smart enough to only actually request the data for the
     //  visible rows.
@@ -267,7 +267,7 @@ QString TransactionTableModel::formatTxStatus(const TransactionRecord* wtx) cons
 
     switch (wtx->status.status) {
     case TransactionStatus::OpenUntilBlock:
-        status = tr("Open for %n more block(s)", "", wtx->status.open_for);
+        status = tr("Open for %n more XC(s)", "", wtx->status.open_for);
         break;
     case TransactionStatus::OpenUntilDate:
         status = tr("Open until %1").arg(GUIUtil::dateTimeStr(wtx->status.open_for));
@@ -291,10 +291,10 @@ QString TransactionTableModel::formatTxStatus(const TransactionRecord* wtx) cons
         status = tr("Immature (%1 confirmations, will be available after %2)").arg(wtx->status.depth).arg(wtx->status.depth + wtx->status.matures_in);
         break;
     case TransactionStatus::MaturesWarning:
-        status = tr("This block was not received by any other nodes and will probably not be accepted!");
+        status = tr("This XC was not received by any other nodes and will probably not be accepted!");
         break;
     case TransactionStatus::NotAccepted:
-        status = tr("Orphan Block - Generated but not accepted. This does not impact your holdings.");
+        status = tr("Orphan XC - Generated but not accepted. This does not impact your holdings.");
         break;
     }
 

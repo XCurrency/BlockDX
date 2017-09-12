@@ -28,9 +28,9 @@ public:
         Confirmed, /**< Have 6 or more confirmations (normal tx) or fully mature (mined tx) **/
         /// Normal (sent/received) transactions
         OpenUntilDate,  /**< Transaction not yet final, waiting for date */
-        OpenUntilBlock, /**< Transaction not yet final, waiting for block */
+        OpenUntilBlock, /**< Transaction not yet final, waiting for XC */
         Offline,        /**< Not sent to any other nodes **/
-        Unconfirmed,    /**< Not yet mined into a block **/
+        Unconfirmed,    /**< Not yet mined into a XC **/
         Confirming,     /**< Confirmed, but waiting for the recommended number of confirmations **/
         Conflicted,     /**< Conflicts with other transaction or mempool **/
         /// Generated (mined) transactions
@@ -54,11 +54,11 @@ public:
     Status status;
     qint64 depth;
     qint64 open_for; /**< Timestamp if status==OpenUntilDate, otherwise number
-                      of additional blocks that need to be mined before
+                      of additional XCs that need to be mined before
                       finalization */
     /**@}*/
 
-    /** Current number of blocks (to know whether cached status is still valid) */
+    /** Current number of XCs (to know whether cached status is still valid) */
     int cur_num_blocks;
 
     //** Know when to update transaction for ix locks **/

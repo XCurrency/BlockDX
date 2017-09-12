@@ -184,7 +184,7 @@ void WalletView::setWalletModel(WalletModel* walletModel)
 
 void WalletView::processNewTransaction(const QModelIndex& parent, int start, int /*end*/)
 {
-    // Prevent balloon-spam when initial block download is in progress
+    // Prevent balloon-spam when initial XC download is in progress
     if (!walletModel || !clientModel || clientModel->inInitialBlockDownload())
         return;
 

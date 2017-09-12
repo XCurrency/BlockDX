@@ -73,7 +73,7 @@ public slots:
     void message(int category, const QString& message, bool html = false);
     /** Set number of connections shown in the UI */
     void setNumConnections(int count);
-    /** Set number of blocks shown in the UI */
+    /** Set number of XCs shown in the UI */
     void setNumBlocks(int count);
     /** Set number of servicenodes shown in the UI */
     void setServicenodeCount(const QString& strServicenodes);
@@ -91,7 +91,7 @@ public slots:
     void showPeers();
     /** Switch to wallet-repair tab and show */
     void showRepair();
-    /** Open external (default) editor with blocknetdx.conf */
+    /** Open external (default) editor with xcurrency.conf */
     void showConfEditor();
     /** Open external (default) editor with servicenode.conf */
     void showMNConfEditor();

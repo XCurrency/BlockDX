@@ -131,7 +131,7 @@ private:
     RPCConsole* rpcConsole;
     BlockExplorer* explorerWindow;
 
-    /** Keep track of previous number of blocks, to detect progress */
+    /** Keep track of previous number of XCs, to detect progress */
     int prevBlocks;
     int spinnerFrame;
 
@@ -163,7 +163,7 @@ signals:
 public slots:
     /** Set number of connections shown in the UI */
     void setNumConnections(int count);
-    /** Set number of blocks shown in the UI */
+    /** Set number of XCs shown in the UI */
     void setNumBlocks(int count);
     /** Get restart command-line parameters and request restart */
     void handleRestart(QStringList args);

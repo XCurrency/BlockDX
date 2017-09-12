@@ -55,9 +55,9 @@ win32 {
 
 QMAKE_CXXFLAGS *= -fpermissive -std=c++11
 
-# use: qmake "USE_QRCODE=1"
+#use: qmake "USE_QRCODE=1"
 # libqrencode (http://fukuchi.org/works/qrencode/index.en.html) must be installed for support
-contains(USE_QRCODE, 1) {
+contains(USE_QRCODE, 0) {
     message(Building with QRCode support)
     DEFINES += USE_QRCODE
     LIBS += -lqrencode

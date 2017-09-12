@@ -1,6 +1,6 @@
 // Copyright (c) 2011-2014 The Bitcoin developers
 // Copyright (c) 2014-2015 The Dash developers
-// Copyright (c) 2015-2017 The BlocknetDX developers
+// Copyright (c) 2015-2017 The XCurrency developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -41,11 +41,11 @@ QString BitcoinUnits::id(int unit)
 {
     switch (unit) {
     case BLOCK:
-        return QString("blocknetdx");
+        return QString("xcurrency");
     case mBLOCK:
-        return QString("mblocknetdx");
+        return QString("mXCurrency");
     case uBLOCK:
-        return QString::fromUtf8("ublocknetdx");
+        return QString::fromUtf8("uXCurrency");
     default:
         return QString("???");
     }
@@ -56,22 +56,22 @@ QString BitcoinUnits::name(int unit)
     if (Params().NetworkID() == CBaseChainParams::MAIN) {
         switch (unit) {
         case BLOCK:
-            return QString("BLOCK");
+            return QString("XC");
         case mBLOCK:
-            return QString("mBLOCK");
+            return QString("mXC");
         case uBLOCK:
-            return QString::fromUtf8("μBLOCK");
+            return QString::fromUtf8("μXC");
         default:
             return QString("???");
         }
     } else {
         switch (unit) {
         case BLOCK:
-            return QString("tBLOCK");
+            return QString("tXC");
         case mBLOCK:
-            return QString("mtBLOCK");
+            return QString("mtXC");
         case uBLOCK:
-            return QString::fromUtf8("μtBLOCK");
+            return QString::fromUtf8("μtXC");
         default:
             return QString("???");
         }
@@ -83,22 +83,22 @@ QString BitcoinUnits::description(int unit)
     if (Params().NetworkID() == CBaseChainParams::MAIN) {
         switch (unit) {
         case BLOCK:
-            return QString("BLOCK");
+            return QString("XC");
         case mBLOCK:
-            return QString("Milli-BLOCK (1 / 1" THIN_SP_UTF8 "000)");
+            return QString("Milli-XC(1 / 1" THIN_SP_UTF8 "000)");
         case uBLOCK:
-            return QString("Micro-BLOCK (1 / 1" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
+            return QString("Micro-XC(1 / 1" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
         default:
             return QString("???");
         }
     } else {
         switch (unit) {
         case BLOCK:
-            return QString("TestBLOCKs");
+            return QString("TestXCs");
         case mBLOCK:
-            return QString("Milli-TestBLOCK (1 / 1" THIN_SP_UTF8 "000)");
+            return QString("Milli-TestXC(1 / 1" THIN_SP_UTF8 "000)");
         case uBLOCK:
-            return QString("Micro-TestBLOCK (1 / 1" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
+            return QString("Micro-TestXC(1 / 1" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
         default:
             return QString("???");
         }

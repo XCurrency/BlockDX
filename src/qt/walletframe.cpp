@@ -129,8 +129,9 @@ void WalletFrame::gotoServicenodePage() // Servicenode list
 void WalletFrame::gotoBlockExplorerPage()
 {
     QMap<QString, WalletView*>::const_iterator i;
-    for (i = mapWalletViews.constBegin(); i != mapWalletViews.constEnd(); ++i)
+    for (i = mapWalletViews.constBegin(); i != mapWalletViews.constEnd(); ++i){
         i.value()->gotoBlockExplorerPage();
+    }
 }
 
 void WalletFrame::gotoReceiveCoinsPage()

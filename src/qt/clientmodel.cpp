@@ -1,6 +1,6 @@
 // Copyright (c) 2011-2014 The Bitcoin developers
 // Copyright (c) 2014-2015 The Dash developers
-// Copyright (c) 2015-2017 The BlocknetDX developers
+// Copyright (c) 2015-2017 The XCurrency developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -70,7 +70,9 @@ int ClientModel::getNumConnections(unsigned int flags) const
 
 QString ClientModel::getServicenodeCountString() const
 {
-    return tr("Total: %1 (OBF compatible: %2 / Enabled: %3)").arg(QString::number((int)mnodeman.size())).arg(QString::number((int)mnodeman.CountEnabled(ActiveProtocol()))).arg(QString::number((int)mnodeman.CountEnabled()));
+    return tr("Total: %1 (OBF compatible: %2 / Enabled: %3)").
+            arg(QString::number((int)mnodeman.size())).arg(QString::number((int)mnodeman.CountEnabled(ActiveProtocol()))).
+            arg(QString::number((int)mnodeman.CountEnabled()));
 }
 
 int ClientModel::getNumBlocks() const
@@ -118,14 +120,14 @@ void ClientModel::updateTimer()
     TRY_LOCK(cs_main, lockMain);
     if (!lockMain)
         return;
-    // Some quantities (such as number of blocks) change so fast that we don't want to be notified for each change.
+    // Some quantities (such as number of XCs) change so fast that we don't want to be notified for each change.
     // Periodically check and update with a timer.
     int newNumBlocks = getNumBlocks();
 
     static int prevAttempt = -1;
     static int prevAssets = -1;
 
-    // check for changed number of blocks we have, number of blocks peers claim to have, reindexing state and importing state
+    // check for changed number of XCs we have, number of XCs peers claim to have, reindexing state and importing state
     if (cachedNumBlocks != newNumBlocks ||
         cachedReindexing != fReindex || cachedImporting != fImporting ||
         servicenodeSync.RequestedServicenodeAttempt != prevAttempt || servicenodeSync.RequestedServicenodeAssets != prevAssets) {

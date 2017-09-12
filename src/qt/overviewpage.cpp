@@ -425,7 +425,7 @@ void OverviewPage::obfuScationStatus()
 
     int nBestHeight = chainActive.Tip()->nHeight;
 
-    // we we're processing more then 1 block per second, we'll just leave
+    // we we're processing more then 1 XC per second, we'll just leave
     if (((nBestHeight - obfuScationPool.cachedNumBlocks) / (GetTimeMillis() - nLastDSProgressBlockTime + 1) > 1)) return;
     nLastDSProgressBlockTime = GetTimeMillis();
 
