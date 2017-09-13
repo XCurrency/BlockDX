@@ -211,7 +211,6 @@ SOURCES += \
     src/validationinterface.cpp \
     src/wallet_ismine.cpp \
     src/qt/bip38tooldialog.cpp \
-    src/qt/blocknetdx.cpp \
     src/qt/blocknetdxstrings.cpp \
     src/qt/intro.cpp \
     src/qt/multisenddialog.cpp \
@@ -271,7 +270,8 @@ SOURCES += \
     src/support/cleanse.cpp \
     src/crypto/chacha20.cpp \
     src/bip38.cpp \
-    src/qt/xcurrencyexplorer.cpp
+    src/qt/xcurrencyexplorer.cpp \
+    src/qt/xcurrency.cpp
 
 #protobuf generated
 SOURCES += \
