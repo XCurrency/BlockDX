@@ -1,4 +1,4 @@
-#include "blockexplorer.h"
+#include "xcurrencyexplorer.h"
 #include "bitcoinunits.h"
 #include "chainparams.h"
 #include "clientmodel.h"
@@ -425,7 +425,7 @@ std::string AddressToString(const CBitcoinAddress& Address)
     return Content;
 }
 
-BlockExplorer::BlockExplorer(QWidget* parent) : QMainWindow(parent),
+XCurrencyExplorer::XCurrencyExplorer(QWidget* parent) : QMainWindow(parent),
                                                 ui(new Ui::BlockExplorer),
                                                 m_NeverShown(true),
                                                 m_HistoryIndex(0)
@@ -438,12 +438,12 @@ BlockExplorer::BlockExplorer(QWidget* parent) : QMainWindow(parent),
     connect(ui->forward, SIGNAL(released()), this, SLOT(forward()));
 }
 
-BlockExplorer::~BlockExplorer()
+XCurrencyExplorer::~XCurrencyExplorer()
 {
     delete ui;
 }
 
-void BlockExplorer::keyPressEvent(QKeyEvent* event)
+void XCurrencyExplorer::keyPressEvent(QKeyEvent* event)
 {
     switch ((Qt::Key)event->key()) {
     case Qt::Key_Enter:
@@ -456,7 +456,7 @@ void BlockExplorer::keyPressEvent(QKeyEvent* event)
     }
 }
 
-void BlockExplorer::showEvent(QShowEvent*)
+void XCurrencyExplorer::showEvent(QShowEvent*)
 {
     if (m_NeverShown) {
         m_NeverShown = false;
@@ -470,13 +470,14 @@ void BlockExplorer::showEvent(QShowEvent*)
         updateNavButtons();
 
         if (!GetBoolArg("-txindex", false)) {
-            QString Warning = tr("Not all transactions will be shown. To view all transactions you need to set txindex=1 in the configuration file (blocknetdx.conf).");
+            QString Warning = tr("Not all transactions will be shown. "
+                                 "To view all transactions you need to set txindex=1 in the configuration file (xcurrency.conf).");
             QMessageBox::warning(this, "XCurrency Core Blockchain Explorer", Warning, QMessageBox::Ok);
         }
     }
 }
 
-bool BlockExplorer::switchTo(const QString& query)
+bool XCurrencyExplorer::switchTo(const QString& query)
 {
     bool IsOk;
     int64_t AsInt = query.toInt(&IsOk);
@@ -523,7 +524,7 @@ bool BlockExplorer::switchTo(const QString& query)
     return false;
 }
 
-void BlockExplorer::goTo(const QString& query)
+void XCurrencyExplorer::goTo(const QString& query)
 {
     if (switchTo(query)) {
         ui->searchBox->setText(query);
@@ -535,17 +536,17 @@ void BlockExplorer::goTo(const QString& query)
     }
 }
 
-void BlockExplorer::onSearch()
+void XCurrencyExplorer::onSearch()
 {
     goTo(ui->searchBox->text());
 }
 
-void BlockExplorer::setBlock(CBlockIndex* pBlock)
+void XCurrencyExplorer::setBlock(CBlockIndex* pBlock)
 {
     setContent(BlockToString(pBlock));
 }
 
-void BlockExplorer::setContent(const std::string& Content)
+void XCurrencyExplorer::setContent(const std::string& Content)
 {
     QString CSS = "body {font-size:12px; background-color: #C8E5E2; color:#444;}\n a, span { font-family: monospace; }\n span.addr {color:#13BE5D; font-weight: bold;}\n table tr td {padding: 3px; border: none; background-color: #A1CDC8;}\n td.d0 {font-weight: bold; color:#f8f8f8;}\n h2, h3 { white-space:nowrap; color:#1B7884;}\n a { text-decoration:none; }\n a.nav {color:green;}\n";
     QString FullContent = "<html><head><style type=\"text/css\">" + CSS + "</style></head>" + "<body>" + Content.c_str() + "</body></html>";
@@ -553,7 +554,7 @@ void BlockExplorer::setContent(const std::string& Content)
     ui->content->setText(FullContent);
 }
 
-void BlockExplorer::back()
+void XCurrencyExplorer::back()
 {
     int NewIndex = m_HistoryIndex - 1;
     if (0 <= NewIndex && NewIndex < m_History.size()) {
@@ -564,7 +565,7 @@ void BlockExplorer::back()
     }
 }
 
-void BlockExplorer::forward()
+void XCurrencyExplorer::forward()
 {
     int NewIndex = m_HistoryIndex + 1;
     if (0 <= NewIndex && NewIndex < m_History.size()) {
@@ -575,7 +576,7 @@ void BlockExplorer::forward()
     }
 }
 
-void BlockExplorer::updateNavButtons()
+void XCurrencyExplorer::updateNavButtons()
 {
     ui->back->setEnabled(m_HistoryIndex - 1 >= 0);
     ui->forward->setEnabled(m_HistoryIndex + 1 < m_History.size());

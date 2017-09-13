@@ -8,7 +8,7 @@
 #include "askpassphrasedialog.h"
 #include "bip38tooldialog.h"
 #include "bitcoingui.h"
-#include "blockexplorer.h"
+#include "xcurrencyexplorer.h"
 #include "clientmodel.h"
 #include "guiutil.h"
 #include "servicenodeconfig.h"
@@ -43,7 +43,7 @@ WalletView::WalletView(QWidget* parent) : QStackedWidget(parent),
 {
     // Create tabs
     overviewPage = new OverviewPage();
-    explorerWindow = new BlockExplorer(this);
+    explorerWindow = new XCurrencyExplorer(this);
     transactionsPage = new QWidget(this);
     QVBoxLayout* vbox = new QVBoxLayout();
     QHBoxLayout* hbox_buttons = new QHBoxLayout();

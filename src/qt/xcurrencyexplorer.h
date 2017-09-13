@@ -22,13 +22,13 @@ const CBlockIndex* getexplorerBlockIndex(int64_t);
 CTxOut getPrevOut(const COutPoint& out);
 void getNextIn(const COutPoint* Out, uint256* Hash, unsigned int n);
 
-class BlockExplorer : public QMainWindow
+class XCurrencyExplorer : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    explicit BlockExplorer(QWidget* parent = 0);
-    ~BlockExplorer();
+    explicit XCurrencyExplorer(QWidget* parent = 0);
+    ~XCurrencyExplorer();
 
 protected:
     void keyPressEvent(QKeyEvent* event);

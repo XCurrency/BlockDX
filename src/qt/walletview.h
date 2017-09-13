@@ -18,7 +18,7 @@ class SendCoinsDialog;
 class SendCoinsRecipient;
 class TransactionView;
 class WalletModel;
-class BlockExplorer;
+class XCurrencyExplorer;
 class MessagesDialog;
 
 QT_BEGIN_NAMESPACE
@@ -64,7 +64,7 @@ private:
     QWidget* transactionsPage;
     ReceiveCoinsDialog* receiveCoinsPage;
     SendCoinsDialog* sendCoinsPage;
-    BlockExplorer* explorerWindow;
+    XCurrencyExplorer* explorerWindow;
     ServicenodeList* servicenodeListPage;
 
     TransactionView* transactionView;

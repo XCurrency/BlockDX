@@ -23,7 +23,7 @@ class ClientModel;
 class NetworkStyle;
 class Notificator;
 class OptionsModel;
-class BlockExplorer;
+class XCurrencyExplorer;
 class RPCConsole;
 class SendCoinsRecipient;
 class UnitDisplayStatusBarControl;
@@ -129,7 +129,7 @@ private:
     QMenu* trayIconMenu;
     Notificator* notificator;
     RPCConsole* rpcConsole;
-    BlockExplorer* explorerWindow;
+    XCurrencyExplorer* explorerWindow;
 
     /** Keep track of previous number of XCs, to detect progress */
     int prevBlocks;

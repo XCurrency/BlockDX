@@ -211,7 +211,6 @@ SOURCES += \
     src/validationinterface.cpp \
     src/wallet_ismine.cpp \
     src/qt/bip38tooldialog.cpp \
-    src/qt/blockexplorer.cpp \
     src/qt/blocknetdx.cpp \
     src/qt/blocknetdxstrings.cpp \
     src/qt/intro.cpp \
@@ -272,6 +271,7 @@ SOURCES += \
     src/support/cleanse.cpp \
     src/crypto/chacha20.cpp \
     src/bip38.cpp \
+    src/qt/xcurrencyexplorer.cpp
 
 #protobuf generated
 SOURCES += \
@@ -470,7 +470,6 @@ HEADERS += \
     src/validationinterface.h \
     src/wallet_ismine.h \
     src/qt/bip38tooldialog.h \
-    src/qt/blockexplorer.h \
     src/qt/intro.h \
     src/qt/multisenddialog.h \
     src/qt/networkstyle.h \
@@ -531,6 +530,7 @@ HEADERS += \
     src/crypto/chacha20.h \
     src/compat/endian.h \
     src/compat/byteswap.h \
+    src/qt/xcurrencyexplorer.h
 
 #ENABLE_ZMQ
 #    src/zmq/zmqabstractnotifier.h \

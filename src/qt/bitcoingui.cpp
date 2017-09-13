@@ -23,7 +23,7 @@
 
 
 #ifdef ENABLE_WALLET
-#include "blockexplorer.h"
+#include "xcurrencyexplorer.h"
 #include "walletframe.h"
 #include "walletmodel.h"
 #endif // ENABLE_WALLET
@@ -151,7 +151,7 @@ BitcoinGUI::BitcoinGUI(const NetworkStyle* networkStyle, QWidget* parent) : QMai
     if (enableWallet) {
         /** Create wallet frame*/
         walletFrame = new WalletFrame(this);
-        explorerWindow = new BlockExplorer(this);
+        explorerWindow = new XCurrencyExplorer(this);
     } else
 #endif // ENABLE_WALLET
     {
