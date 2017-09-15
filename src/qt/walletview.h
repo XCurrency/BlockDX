@@ -69,7 +69,7 @@ private:
 
     TransactionView* transactionView;
 
-    MessagesDialog * messagesPage;
+
 
 
 

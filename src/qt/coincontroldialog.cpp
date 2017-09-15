@@ -250,7 +250,7 @@ void CoinControlDialog::showMenu(const QPoint& point)
     if (item) {
         contextMenuItem = item;
 
-        // disable some items (like Copy Transaction ID, lock, unlock) for tree roots in context menu
+        // disable some items_ (like Copy Transaction ID, lock, unlock) for tree roots in context menu
         if (item->text(COLUMN_TXHASH).length() == 64) // transaction hash is 64 characters (this means its a child node, so its not a parent node in tree mode)
         {
             copyTransactionHashAction->setEnabled(true);

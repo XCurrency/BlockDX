@@ -9,7 +9,7 @@
 # All text after a hash (#) is considered a comment and will be ignored
 # The format is:
 #       TAG = value [value, ...]
-# For lists items can also be appended using:
+# For lists items_ can also be appended using:
 #       TAG += value [value, ...]
 # Values that contain spaces should be placed between quotes (" ")
 
@@ -1023,7 +1023,7 @@ CHM_INDEX_ENCODING     =
 
 BINARY_TOC             = NO
 
-# The TOC_EXPAND flag can be set to YES to add extra items for group members
+# The TOC_EXPAND flag can be set to YES to add extra items_ for group members
 # to the contents of the HTML help documentation and to the tree view.
 
 TOC_EXPAND             = NO

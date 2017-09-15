@@ -21,7 +21,7 @@
 #include "transactiontablemodel.h"
 #include "transactionview.h"
 #include "walletmodel.h"
-
+#include "xchat/messagedialog.h"
 
 
 

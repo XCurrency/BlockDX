@@ -1498,7 +1498,7 @@ bool AppInit2(boost::thread_group& threadGroup)
             LogPrintf("file format is unknown or invalid, please fix it manually\n");
     }
 
-    //flag our cached items so we send them to our peers
+    //flag our cached items_ so we send them to our peers
     budget.ResetSync();
     budget.ClearSeen();
 

@@ -119,7 +119,7 @@ class Env {
   //
   // "function" may run in an unspecified thread.  Multiple functions
   // added to the same Env may run concurrently in different threads.
-  // I.e., the caller may not assume that background work items are
+  // I.e., the caller may not assume that background work items_ are
   // serialized.
   virtual void Schedule(
       void (*function)(void* arg),

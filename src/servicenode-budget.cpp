@@ -1160,7 +1160,7 @@ void CBudgetManager::MarkSynced()
     LOCK(cs);
 
     /*
-        Mark that we've sent all valid items
+        Mark that we've sent all valid items_
     */
 
     std::map<uint256, CBudgetProposalBroadcast>::iterator it1 = mapSeenServicenodeBudgetProposals.begin();
@@ -1235,7 +1235,7 @@ void CBudgetManager::Sync(CNode* pfrom, uint256 nProp, bool fPartial)
 
     pfrom->PushMessage("ssc", SERVICENODE_SYNC_BUDGET_PROP, nInvCount);
 
-    LogPrint("mnbudget", "CBudgetManager::Sync - sent %d items\n", nInvCount);
+    LogPrint("mnbudget", "CBudgetManager::Sync - sent %d items_\n", nInvCount);
 
     nInvCount = 0;
 
@@ -1262,7 +1262,7 @@ void CBudgetManager::Sync(CNode* pfrom, uint256 nProp, bool fPartial)
     }
 
     pfrom->PushMessage("ssc", SERVICENODE_SYNC_BUDGET_FIN, nInvCount);
-    LogPrint("mnbudget", "CBudgetManager::Sync - sent %d items\n", nInvCount);
+    LogPrint("mnbudget", "CBudgetManager::Sync - sent %d items_\n", nInvCount);
 }
 
 bool CBudgetManager::UpdateProposal(CBudgetVote& vote, CNode* pfrom, std::string& strError)
@@ -1271,7 +1271,7 @@ bool CBudgetManager::UpdateProposal(CBudgetVote& vote, CNode* pfrom, std::string
 
     if (!mapProposals.count(vote.nProposalHash)) {
         if (pfrom) {
-            // only ask for missing items after our syncing process is complete --
+            // only ask for missing items_ after our syncing process is complete --
             //   otherwise we'll think a full sync succeeded when they return a result
             if (!servicenodeSync.IsSynced()) return false;
 
@@ -1298,7 +1298,7 @@ bool CBudgetManager::UpdateFinalizedBudget(CFinalizedBudgetVote& vote, CNode* pf
 
     if (!mapFinalizedBudgets.count(vote.nBudgetHash)) {
         if (pfrom) {
-            // only ask for missing items after our syncing process is complete --
+            // only ask for missing items_ after our syncing process is complete --
             //   otherwise we'll think a full sync succeeded when they return a result
             if (!servicenodeSync.IsSynced()) return false;
 

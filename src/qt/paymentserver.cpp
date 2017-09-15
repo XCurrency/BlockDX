@@ -180,7 +180,7 @@ void PaymentServer::LoadRootCAs(X509_STORE* _store)
 //
 // Sending to the server is done synchronously, at startup.
 // If the server isn't already running, startup continues,
-// and the items in savedPaymentRequest will be handled
+// and the items_ in savedPaymentRequest will be handled
 // when uiReady() is called.
 //
 // Warning: ipcSendCommandLine() is called early in init,
@@ -234,7 +234,7 @@ void PaymentServer::ipcParseCommandLine(int argc, char* argv[])
 //
 // Sending to the server is done synchronously, at startup.
 // If the server isn't already running, startup continues,
-// and the items in savedPaymentRequest will be handled
+// and the items_ in savedPaymentRequest will be handled
 // when uiReady() is called.
 //
 bool PaymentServer::ipcSendCommandLine()

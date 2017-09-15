@@ -2661,7 +2661,7 @@ string CWallet::PrepareObfuscationDenominate(int minRounds, int maxRounds)
                     if ((*it2).tx->vout[(*it2).i].nValue == v) {
                         // add new input in resulting vector
                         vCoinsResult.push_back(*it);
-                        // remove corresponting items from initial vectors
+                        // remove corresponting items_ from initial vectors
                         vCoins.erase(it);
                         vCoins2.erase(it2);
 

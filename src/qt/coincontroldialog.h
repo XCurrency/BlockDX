@@ -5,7 +5,7 @@
 #ifndef BITCOIN_QT_COINCONTROLDIALOG_H
 #define BITCOIN_QT_COINCONTROLDIALOG_H
 
-#include "amount.h"
+#include "../amount.h"
 
 #include <QAbstractButton>
 #include <QAction>
@@ -19,45 +19,48 @@
 class WalletModel;
 
 class CCoinControl;
+
 class CTxMemPool;
 
-namespace Ui
-{
-class CoinControlDialog;
+namespace Ui {
+    class CoinControlDialog;
 }
 
-class CoinControlDialog : public QDialog
-{
-    Q_OBJECT
+class CoinControlDialog : public QDialog {
+Q_OBJECT
 
 public:
-    explicit CoinControlDialog(QWidget* parent = 0);
+    explicit CoinControlDialog(QWidget *parent = 0);
+
     ~CoinControlDialog();
 
-    void setModel(WalletModel* model);
+    void setModel(WalletModel *model);
 
     // static because also called from sendcoinsdialog
-    static void updateLabels(WalletModel*, QDialog*);
+    static void updateLabels(WalletModel *, QDialog *);
+
     static QString getPriorityLabel(double dPriority, double mempoolEstimatePriority);
 
     static QList<CAmount> payAmounts;
-    static CCoinControl* coinControl;
+    static CCoinControl *coinControl;
     static int nSplitBlockDummy;
 
 private:
-    Ui::CoinControlDialog* ui;
-    WalletModel* model;
+    Ui::CoinControlDialog *ui;
+    WalletModel *model;
     int sortColumn;
     Qt::SortOrder sortOrder;
 
-    QMenu* contextMenu;
-    QTreeWidgetItem* contextMenuItem;
-    QAction* copyTransactionHashAction;
-    QAction* lockAction;
-    QAction* unlockAction;
+    QMenu *contextMenu;
+    QTreeWidgetItem *contextMenuItem;
+    QAction *copyTransactionHashAction;
+    QAction *lockAction;
+    QAction *unlockAction;
 
     QString strPad(QString, int, QString);
+
     void sortView(int, Qt::SortOrder);
+
     void updateView();
 
     enum {
@@ -77,8 +80,7 @@ private:
     };
 
     // some columns have a hidden column containing the value used for sorting
-    int getMappedColumn(int column, bool fVisibleColumn = true)
-    {
+    int getMappedColumn(int column, bool fVisibleColumn = true) {
         if (fVisibleColumn) {
             if (column == COLUMN_AMOUNT_INT64)
                 return COLUMN_AMOUNT;
@@ -99,28 +101,51 @@ private:
     }
 
 private slots:
-    void showMenu(const QPoint&);
+
+    void showMenu(const QPoint &);
+
     void copyAmount();
+
     void copyLabel();
+
     void copyAddress();
+
     void copyTransactionHash();
+
     void lockCoin();
+
     void unlockCoin();
+
     void clipboardQuantity();
+
     void clipboardAmount();
+
     void clipboardFee();
+
     void clipboardAfterFee();
+
     void clipboardBytes();
+
     void clipboardPriority();
+
     void clipboardLowOutput();
+
     void clipboardChange();
+
     void radioTreeMode(bool);
+
     void radioListMode(bool);
-    void viewItemChanged(QTreeWidgetItem*, int);
+
+    void viewItemChanged(QTreeWidgetItem *, int);
+
     void headerSectionClicked(int);
-    void buttonBoxClicked(QAbstractButton*);
+
+    void buttonBoxClicked(QAbstractButton *);
+
     void buttonSelectAllClicked();
+
     void buttonToggleLockClicked();
+
     void updateLabelLocked();
 };
 

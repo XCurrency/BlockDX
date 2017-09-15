@@ -148,7 +148,7 @@ TEST(CacheTest, EvictionPolicy) {
 
 TEST(CacheTest, HeavyEntries) {
   // Add a bunch of light and heavy entries and then count the combined
-  // size of items still in the cache, which must be approximately the
+  // size of items_ still in the cache, which must be approximately the
   // same as the total capacity.
   const int kLight = 1;
   const int kHeavy = 10;

@@ -11,13 +11,13 @@
 #include "guiutil.h"
 #include "peertablemodel.h"
 
-#include "chainparams.h"
-#include "main.h"
-#include "rpcclient.h"
-#include "rpcserver.h"
-#include "util.h"
+#include "../chainparams.h"
+#include "../main.h"
+#include "../rpcclient.h"
+#include "../rpcserver.h"
+#include "../util.h"
 
-#include "json/json_spirit_value.h"
+#include "../json/json_spirit_value.h"
 
 #include <openssl/crypto.h>
 

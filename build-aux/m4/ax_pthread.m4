@@ -119,14 +119,14 @@ fi
 # libraries is broken (non-POSIX).
 
 # Create a list of thread flags to try.  Items starting with a "-" are
-# C compiler flags, and other items are library names, except for "none"
+# C compiler flags, and other items_ are library names, except for "none"
 # which indicates that we try without any flags at all, and "pthread-config"
 # which is a program returning the flags for the Pth emulation library.
 
 ax_pthread_flags="pthreads none -Kthread -kthread lthread -pthread -pthreads -mthreads pthread --thread-safe -mt pthread-config"
 
 # The ordering *is* (sometimes) important.  Some notes on the
-# individual items follow:
+# individual items_ follow:
 
 # pthreads: AIX (must check this before -lpthread)
 # none: in case threads are in libc; should be tried before -Kthread and

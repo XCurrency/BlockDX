@@ -409,7 +409,7 @@ bool ReadKeyValue(CWallet* pwallet, CDataStream& ssKey, CDataStream& ssValue, CW
     try {
         // Unserialize
         // Taking advantage of the fact that pair serialization
-        // is just the two items serialized one after the other
+        // is just the two items_ serialized one after the other
         ssKey >> strType;
         if (strType == "name") {
             string strAddress;

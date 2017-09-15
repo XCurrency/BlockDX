@@ -140,7 +140,7 @@ bool parseBitcoinURI(const QUrl& uri, SendCoinsRecipient* out)
     rv.amount = 0;
 
 #if QT_VERSION < 0x050000
-    QList<QPair<QString, QString> > items = uri.queryItems();
+    QList<QPair<QString, QString> > items_ = uri.queryItems();
 #else
     QUrlQuery uriQuery(uri);
     QList<QPair<QString, QString> > items = uriQuery.queryItems();
@@ -721,7 +721,7 @@ bool SetStartOnSystemStartup(bool fAutoStart)
 LSSharedFileListItemRef findStartupItemInList(LSSharedFileListRef list, CFURLRef findUrl);
 LSSharedFileListItemRef findStartupItemInList(LSSharedFileListRef list, CFURLRef findUrl)
 {
-    // loop through the list of startup items and try to find the XCurrency app
+    // loop through the list of startup items_ and try to find the XCurrency app
     CFArrayRef listSnapshot = LSSharedFileListCopySnapshot(list, NULL);
     for (int i = 0; i < CFArrayGetCount(listSnapshot); i++) {
         LSSharedFileListItemRef item = (LSSharedFileListItemRef)CFArrayGetValueAtIndex(listSnapshot, i);
