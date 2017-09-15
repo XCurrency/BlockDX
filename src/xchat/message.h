@@ -71,10 +71,22 @@ struct Message {
 
     }
 
+    /**
+     *
+     */
     Message(const Message &) = default;
 
+    /**
+     *
+     * @return
+     */
     Message &operator=(const Message &) = default;
 
+    /**
+     *
+     * @param other
+     * @return
+     */
     bool operator<(const Message &other) {
         return date < other.date;
     }
@@ -185,7 +197,7 @@ struct Message {
 private:
     static boost::recursive_mutex m_knownMessagesLocker;
 
-    static std::set<uint256> m_knownMessages;
+    static std::set<uint256> knownMessages_;
 
 };
 

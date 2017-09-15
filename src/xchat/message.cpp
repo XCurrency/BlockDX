@@ -21,7 +21,7 @@
 #include <boost/algorithm/string.hpp>
 
 boost::recursive_mutex Message::m_knownMessagesLocker;
-std::set<uint256>      Message::m_knownMessages;
+std::set<uint256>      Message::knownMessages_;
 
 
 uint256 Message::getNetworkHash() const {
@@ -39,8 +39,8 @@ uint256 Message::getHash() const {
 }
 
 uint256 Message::getStaticHash() const {
-    std::string hashstr = from + to;
-    return Hash(hashstr.begin(), hashstr.end(),
+    std::string hashStr = from + to;
+    return Hash(hashStr.begin(), hashStr.end(),
                 encryptedData.begin(), encryptedData.end());
 }
 
@@ -50,13 +50,13 @@ bool Message::appliesToMe() const {
         return true;
     }
 
-    CBitcoinAddress addr(to);
-    if (!addr.IsValid()) {
+    CBitcoinAddress address(to);
+    if (!address.IsValid()) {
         return false;
     }
 
     CKeyID id;
-    if (!addr.GetKeyID(id)) {
+    if (!address.GetKeyID(id)) {
         return false;
     }
 
@@ -85,10 +85,10 @@ time_t Message::getTime() const {
 }
 
 bool Message::isExpired() const {
-//    auto secs = static_cast<int>(std::time(nullptr) - getTime());
+    auto secs = static_cast<int>(std::time(nullptr) - getTime());
 //
 //    // +-2 days
-//    return (secs < -60 * 60 * 24 * 2) || (secs > 60 * 60 * 24 * 2);
+    return (secs < -60 * 60 * 24 * 2) || (secs > 60 * 60 * 24 * 2);
 
 
 }
@@ -107,11 +107,11 @@ bool Message::process(bool &isForMe) {
 //            LOCK(m_knownMessagesLocker);
 
             uint256 hash = getHash();
-            if (m_knownMessages.count(hash) > 0) {
+            if (knownMessages_.count(hash) > 0) {
                 // already received and processed
                 return true;
             }
-            m_knownMessages.insert(hash);
+            knownMessages_.insert(hash);
         }
         uiInterface.NotifyNewMessage(*this);
 
