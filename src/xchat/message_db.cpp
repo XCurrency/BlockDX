@@ -76,14 +76,14 @@ bool ChatDb::loadAddresses(std::vector<std::string> &addresses) {
             break;
         }
 
-        std::string addr;
-        key >> addr;
+        std::string address;
+        key >> address;
 
-        if (addr == undelivered_) {
+        if (address == undelivered_) {
             continue;
         }
 
-        addresses.push_back(addr);
+        addresses.push_back(address);
     }
 
     cur->close();
