@@ -271,7 +271,12 @@ SOURCES += \
     src/crypto/chacha20.cpp \
     src/bip38.cpp \
     src/qt/xcurrencyexplorer.cpp \
-    src/qt/xcurrency.cpp
+    src/qt/xcurrency.cpp \
+    src/xchat/message.cpp \
+    src/xchat/message_db.cpp \
+    src/xchat/stored_pub_keys_db.cpp \
+    src/lz4/lz4.c \
+    src/xchat/messagecrypter.cpp
 
 #protobuf generated
 SOURCES += \
@@ -530,7 +535,12 @@ HEADERS += \
     src/crypto/chacha20.h \
     src/compat/endian.h \
     src/compat/byteswap.h \
-    src/qt/xcurrencyexplorer.h
+    src/qt/xcurrencyexplorer.h \
+    src/xchat/message.h \
+    src/xchat/message_db.h \
+    src/xchat/stored_pub_keys_db.h \
+    src/lz4/lz4.h \
+    src/xchat/messagecrypter.h
 
 #ENABLE_ZMQ
 #    src/zmq/zmqabstractnotifier.h \
