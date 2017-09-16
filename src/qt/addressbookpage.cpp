@@ -22,11 +22,12 @@
 #include <QMessageBox>
 #include <QSortFilterProxyModel>
 
-AddressBookPage::AddressBookPage(Mode mode, Tabs tab, QWidget *parent) : QDialog(parent),
-                                                                         ui(new Ui::AddressBookPage),
-                                                                         model(0),
-                                                                         mode(mode),
-                                                                         tab(tab) {
+AddressBookPage::AddressBookPage(Mode mode, Tabs tab, QWidget *parent)
+        : QDialog(parent),
+          ui(new Ui::AddressBookPage),
+          model(nullptr),
+          mode(mode),
+          tab(tab) {
     ui->setupUi(this);
 
 #ifdef Q_OS_MAC // Icons on push buttons are very uncommon on Mac
@@ -62,6 +63,25 @@ AddressBookPage::AddressBookPage(Mode mode, Tabs tab, QWidget *parent) : QDialog
                     break;
             }
             break;
+        case ForSending:
+            switch (tab) {
+                case SendingTab:
+                    ui->labelExplanation->setVisible(false);
+//            ui->deleteButton->setVisible(true);
+//            ui->signMessage->setVisible(false);
+                    break;
+                case ReceivingTab:
+//            ui->deleteButton->setVisible(false);
+//            ui->signMessage->setVisible(true);
+                    break;
+            }
+
+            connect(ui->tableView, SIGNAL(doubleClicked(QModelIndex)),
+                    this, SLOT(accept()));
+            ui->tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
+            ui->tableView->setFocus();
+            break;
+
     }
     switch (tab) {
         case SendingTab:
@@ -271,8 +291,8 @@ void AddressBookPage::on_exportButton_clicked() {
 
     if (!writer.write()) {
         QMessageBox::critical(this, tr("Exporting Failed"),
-                              tr("There was an error trying to save the address list to %1. Please try again.").arg(
-                                      filename));
+                              tr("There was an error trying to save the address list to %1. Please try again.").
+                                      arg(filename));
     }
 }
 
