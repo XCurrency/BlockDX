@@ -114,6 +114,7 @@ private:
     QAction *overviewAction;
     QAction *historyAction;
     QAction *servicenodeAction;
+    QAction *messagesPageAction;
     QAction *quitAction;
     QAction *sendCoinsAction;
     QAction *usedSendingAddressesAction;
@@ -143,6 +144,7 @@ private:
     QAction *openBlockExplorerAction;
     QAction *showHelpMessageAction;
     QAction *multiSendAction;
+
 
 
     QSystemTrayIcon *trayIcon;
@@ -224,6 +226,9 @@ public slots:
 
 private slots:
 #ifdef ENABLE_WALLET
+
+    void gotoXchatPage();
+
     /** Switch to overview (home) page */
     void gotoOverviewPage();
     /** Switch to history (transactions) page */

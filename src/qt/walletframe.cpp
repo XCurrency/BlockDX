@@ -122,51 +122,64 @@ void WalletFrame::gotoHistoryPage()
 void WalletFrame::gotoServicenodePage() // Servicenode list
 {
     QMap<QString, WalletView*>::const_iterator i;
-    for (i = mapWalletViews.constBegin(); i != mapWalletViews.constEnd(); ++i)
+    for (i = mapWalletViews.constBegin(); i != mapWalletViews.constEnd(); ++i) {
         i.value()->gotoServicenodePage();
+    }
 }
 
 void WalletFrame::gotoBlockExplorerPage()
 {
     QMap<QString, WalletView*>::const_iterator i;
-    for (i = mapWalletViews.constBegin(); i != mapWalletViews.constEnd(); ++i){
-        i.value()->gotoBlockExplorerPage();
+    for (i = mapWalletViews.constBegin(); i != mapWalletViews.constEnd(); ++i) {
+        {
+            i.value()->gotoBlockExplorerPage();
+        }
     }
 }
 
 void WalletFrame::gotoReceiveCoinsPage()
 {
     QMap<QString, WalletView*>::const_iterator i;
-    for (i = mapWalletViews.constBegin(); i != mapWalletViews.constEnd(); ++i)
+    for (i = mapWalletViews.constBegin(); i != mapWalletViews.constEnd(); ++i) {
         i.value()->gotoReceiveCoinsPage();
+    }
 }
 
 void WalletFrame::gotoSendCoinsPage(QString addr)
 {
     QMap<QString, WalletView*>::const_iterator i;
-    for (i = mapWalletViews.constBegin(); i != mapWalletViews.constEnd(); ++i)
+    for (i = mapWalletViews.constBegin(); i != mapWalletViews.constEnd(); ++i) {
         i.value()->gotoSendCoinsPage(addr);
+    }
 }
 
 void WalletFrame::gotoSignMessageTab(QString addr)
 {
     WalletView* walletView = currentWalletView();
-    if (walletView)
+    if (walletView) {
         walletView->gotoSignMessageTab(addr);
+    }
 }
 
 void WalletFrame::gotoVerifyMessageTab(QString addr)
 {
     WalletView* walletView = currentWalletView();
-    if (walletView)
+    if (walletView) {
         walletView->gotoVerifyMessageTab(addr);
+    }
 }
 
 void WalletFrame::gotoBip38Tool()
 {
     WalletView* walletView = currentWalletView();
-    if (walletView)
+    if (walletView) {
         walletView->gotoBip38Tool();
+    }
+}
+
+void WalletFrame::gotoXChatTab() {
+    auto walletView = currentWalletView();
+    walletView->gotoXChatTab();
 }
 
 void WalletFrame::gotoMultiSendDialog()

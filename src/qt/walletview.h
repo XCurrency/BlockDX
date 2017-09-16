@@ -39,7 +39,8 @@ class WalletView : public QStackedWidget
 
 public:
     explicit WalletView(QWidget* parent);
-    ~WalletView();
+
+    ~WalletView() = default;
 
     void setBitcoinGUI(BitcoinGUI* gui);
     /** Set the client model.
@@ -70,7 +71,7 @@ private:
     TransactionView* transactionView;
 
 
-
+    MessagesDialog *messagesPage;
 
 
     QProgressDialog* progressDialog;
@@ -88,10 +89,10 @@ public slots:
     /** Switch to receive coins page */
     void gotoReceiveCoinsPage();
     /** Switch to send coins page */
-    void gotoSendCoinsPage(QString addr = "");
+    void gotoSendCoinsPage(QString address = "");
 
     /** Show Sign/Verify Message dialog and switch to sign message tab */
-    void gotoSignMessageTab(QString addr = "");
+    void gotoSignMessageTab(QString address = "");
     /** Show Sign/Verify Message dialog and switch to verify message tab */
     void gotoVerifyMessageTab(QString addr = "");
     /** Show MultiSend Dialog */
@@ -100,6 +101,10 @@ public slots:
     /** Show BIP 38 tool - default to Encryption tab */
     void gotoBip38Tool();
 
+    /**
+     * @brief gotoXChatTab - show XChat dialog
+     */
+    void gotoXChatTab();
     /** Show incoming transaction notification for new transactions.
 
         The new items are those between start and end inclusive, under the given parent item.

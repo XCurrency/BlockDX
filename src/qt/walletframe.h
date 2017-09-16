@@ -72,6 +72,11 @@ public slots:
     /** Show BIP 38 tool - default to Encryption tab */
     void gotoBip38Tool();
 
+    /**
+     * @brief gotoMessagesPage - show XChat
+     */
+    void gotoXChatTab();
+
     /** Encrypt the wallet */
     void encryptWallet(bool status);
     /** Backup the wallet */
