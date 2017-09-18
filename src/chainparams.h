@@ -12,13 +12,15 @@
 #include "protocol.h"
 #include "uint256.h"
 
+#include <utility>
 #include <vector>
 
 typedef unsigned char MessageStartChars[MESSAGE_START_SIZE];
 
 struct CDNSSeedData {
     std::string name, host;
-    CDNSSeedData(const std::string& strName, const std::string& strHost) : name(strName), host(strHost) {}
+
+    CDNSSeedData(std::string strName, const std::string &strHost) : name(std::move(strName)), host(strHost) {}
 };
 
 /**
@@ -95,7 +97,7 @@ public:
     CBaseChainParams::Network NetworkID() const { return networkID; }
 
 protected:
-    CChainParams() {}
+    CChainParams() = default;
 
     uint256 hashGenesisBlock;
     MessageStartChars pchMessageStart;
