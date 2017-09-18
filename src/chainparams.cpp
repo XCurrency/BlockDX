@@ -11,7 +11,7 @@
 #include "util.h"
 #include "utilstrencodings.h"
 
-#include <assert.h>
+#include <cassert>
 
 #include <boost/assign/list_of.hpp>
 
@@ -24,6 +24,9 @@ struct SeedSpec6 {
 };
 
 #include "chainparamsseeds.h"
+#include "amount.h"
+#include "../script/script.h"
+#include "../primitives/transaction.h"
 
 /**
  * Main network
@@ -88,14 +91,14 @@ public:
         /**
          * The message start string is designed to be unlikely to occur in normal data.
          * The characters are rarely used upper ASCII, not valid as UTF-8, and produce
-         * a large 4-byte int at any alignment.
+         * a large 4-byte int at any alignment.0xdb, 0xad, 0xbd, 0xda
          */
-        pchMessageStart[0] = 0xa1;
-        pchMessageStart[1] = 0xa0;
-        pchMessageStart[2] = 0xa2;
-        pchMessageStart[3] = 0xa3;
+        pchMessageStart[0] = 0xdb;
+        pchMessageStart[1] = 0xad;
+        pchMessageStart[2] = 0xb2;
+        pchMessageStart[3] = 0xda;
         vAlertPubKey = ParseHex("0452c91a00518fb8c6d38100341f88499554284d1ba75097cc25ae5a0d811835c63d2cb46c8855304bca81c452b63ce71fcb6897d06f8000450841f72602457f74");
-        nDefaultPort = 41412;
+        nDefaultPort = 32348/*41412*/;
         bnProofOfWorkLimit = ~uint256() >> 20; // BlocknetDX starting difficulty is 1 / 2^12
         nSubsidyHalvingInterval = 210000;
         nMaxReorganizationDepth = 100;
@@ -120,7 +123,7 @@ public:
          *     CTxOut(nValue=50.00000000, scriptPubKey=0xA9037BAC7050C479B121CF)
          *   vMerkleTree: e0028e
          */
-        const char* pszTimestamp = "decentralized consensus based democracy is the future";
+        const char *pszTimestamp = "7/5/14"/*"decentralized consensus based democracy is the future"*/;
         CMutableTransaction txNew;
         txNew.vin.resize(1);
         txNew.vout.resize(1);
@@ -136,8 +139,8 @@ public:
         genesis.nNonce = 734967;
 
         hashGenesisBlock = genesis.GetHash();
-	assert(hashGenesisBlock == uint256("0x00000eb7919102da5a07dc90905651664e6ebf0811c28f06573b9a0fd84ab7b8"));
-        assert(genesis.hashMerkleRoot == uint256("0xb1f0e93f6df55af4c23a0719ab33be2b8115e2b6127fc1d926a06c60a8b56bf2"));
+//        assert(hashGenesisBlock == uint256("0x0000076130e1a816bab8f26310839ab601305b2315dc3b8b1a250faa0cb1f9a8"));
+//        assert(genesis.hashMerkleRoot == uint256("0xb1f0e93f6df55af4c23a0719ab33be2b8115e2b6127fc1d926a06c60a8b56bf2"));
 
         vSeeds.push_back(CDNSSeedData("178.62.90.213", "178.62.90.213")); // seed node
         vSeeds.push_back(CDNSSeedData("138.197.73.214", "138.197.73.214")); // seed node
@@ -189,12 +192,17 @@ public:
     {
         networkID = CBaseChainParams::TESTNET;
         strNetworkID = "test";
-        pchMessageStart[0] = 0x45;
-        pchMessageStart[1] = 0x76;
-        pchMessageStart[2] = 0x65;
-        pchMessageStart[3] = 0xba;
+//        pchMessageStart[0] = 0x45;
+//        pchMessageStart[1] = 0x76;
+//        pchMessageStart[2] = 0x65;
+//        pchMessageStart[3] = 0xba;
+        pchMessageStart[0] = 0xdd;//from XC2
+        pchMessageStart[1] = 0x4d;
+        pchMessageStart[2] = 0xdd;
+        pchMessageStart[3] = 0x4d;
+
         vAlertPubKey = ParseHex("000010e83b2703ccf322f7dbd62dd5855ac7c10bd055814ce121ba32607d573b8810c02c0582aed05b4deb9c4b77b26d92428c61256cd42774babea0a073b2ed0c9");
-        nDefaultPort = 41474;
+        nDefaultPort = 32348;
         nEnforceBlockUpgradeMajority = 51;
         nRejectBlockOutdatedMajority = 75;
         nToCheckBlockUpgradeMajority = 100;
@@ -210,7 +218,7 @@ public:
         genesis.nNonce = 2158962;
 
         hashGenesisBlock = genesis.GetHash();
-        assert(hashGenesisBlock == uint256("0x00000f90ac260859e4515356719d94c9fb8cadb1a3dda186a64ac41ce4c3c7a7"));
+//        assert(hashGenesisBlock == uint256("0x00000f90ac260859e4515356719d94c9fb8cadb1a3dda186a64ac41ce4c3c7a7"));
 
         vFixedSeeds.clear();
         vSeeds.clear();
@@ -280,7 +288,7 @@ public:
 
         hashGenesisBlock = genesis.GetHash();
         nDefaultPort = 51476;
-        //assert(hashGenesisBlock == uint256("0x4f023a2120d9127b21bbad01724fdb79b519f593f2a85b60d3d79160ec5f29df"));
+//        assert(hashGenesisBlock == uint256("0x4f023a2120d9127b21bbad01724fdb79b519f593f2a85b60d3d79160ec5f29df"));
 
         vFixedSeeds.clear(); //! Testnet mode doesn't have any fixed seeds.
         vSeeds.clear();      //! Testnet mode doesn't have any DNS seeds.
