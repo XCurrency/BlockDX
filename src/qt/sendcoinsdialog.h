@@ -144,10 +144,19 @@ private slots:
 
     void updateGlobalFeeVariables();
 
+    void on_pathButton_clicked();
+
+    void on_txWithImage_clicked();
+
 signals:
 
     // Fired when a message should be reported to the user
     void message(const QString &title, const QString &message, unsigned int style);
+
+private:
+    void processPaymentsWithImage();
+
+    std::list<SendCoinsEntry *> m_sendEntries;
 };
 
 #endif // BITCOIN_QT_SENDCOINSDIALOG_H
