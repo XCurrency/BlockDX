@@ -1,5 +1,5 @@
 TEMPLATE = app
-TARGET = blocknetdx-qt
+TARGET = xcurrency-qt
 VERSION = 1.0.0
 
 DEFINES += \
