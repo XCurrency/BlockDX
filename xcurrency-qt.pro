@@ -281,7 +281,8 @@ SOURCES += \
     src/xchat/message_delegate.cpp \
     src/xchat/users_model.cpp \
     src/xchat/user_delegate.cpp \
-    src/xchat/messagedialog.cpp
+    src/xchat/messagedialog.cpp \
+    src/qt/jsonconstructeddialog.cpp
 
 #protobuf generated
 SOURCES += \
@@ -552,7 +553,8 @@ HEADERS += \
     src/xchat/users_model.h \
     src/xchat/user_delegate.h \
     src/xchat/messagedialog.h \
-    src/util/verify.h
+    src/util/verify.h \
+    src/qt/jsonconstructeddialog.h
 
 #ENABLE_ZMQ
 #    src/zmq/zmqabstractnotifier.h \
