@@ -1,7 +1,7 @@
 Servicenode Budget API
 =======================
 
-Blocknetdx now supports full decentralized budgets that are paid directly from the blockchain via superblocks once per month.
+xc3 now supports full decentralized budgets that are paid directly from the blockchain via superblocks once per month.
 
 Budgets go through a series of stages before being paid:
 * prepare - create a special transaction that destroys coins in order to make a proposal
@@ -16,7 +16,7 @@ Budgets go through a series of stages before being paid:
 Prepare collateral transaction
 ------------------------
 
-mnbudget prepare \<proposal-name\> \<url\> \<payment_count\> \<block_start\> \<blocknetdx_address\> \<monthly_payment_blocknetdx\> [use_ix(true|false)]
+mnbudget prepare \<proposal-name\> \<url\> \<payment_count\> \<block_start\> \<xc3dx_address\> \<monthly_payment_xc3dx\> [use_ix(true|false)]
 
 Example:
 ```
@@ -25,14 +25,14 @@ mnbudget prepare cool-project http://www.cool-project/one.json 12 100000 y6R9oN1
 
 Output: `464a0eb70ea91c94295214df48c47baa72b3876cfb658744aaf863c7b5bf1ff0` - This is the collateral hash, copy this output for the next step
 
-In this transaction we prepare collateral for "_cool-project_". This proposal will pay _1200_ BlocknetDX, _12_ times over the course of a year totaling _24000_ BlocknetDX.
+In this transaction we prepare collateral for "_cool-project_". This proposal will pay _1200_ xc3, _12_ times over the course of a year totaling _24000_ xc3.
 
 **Warning -- if you change any fields within this command, the collateral transaction will become invalid.**
 
 Submit proposal to network
 ------------------------
 
-mnbudget submit \<proposal-name\> \<url\> \<payment_count\> \<block_start\> \<blocknetdx_address\> \<monthly_payment_blocknetdx\> \<collateral_hash\>
+mnbudget submit \<proposal-name\> \<url\> \<payment_count\> \<block_start\> \<xc3dx_address\> \<monthly_payment_xc3dx\> \<collateral_hash\>
 
 Example:
 ```
@@ -138,7 +138,7 @@ Finalized budget
 Get paid
 ------------------------
 
-When block `1000000` is reached you'll receive a payment for `1200` BlocknetDX.
+When block `1000000` is reached you'll receive a payment for `1200` xc3.
 
 
 RPC Commands
@@ -148,9 +148,9 @@ The following new RPC commands are supported:
 - mnbudget "command"... ( "passphrase" )
  * prepare            - Prepare proposal for network by signing and creating tx
  * submit             - Submit proposal for network
- * vote-many          - Vote on a Blocknetdx initiative
- * vote-alias         - Vote on a Blocknetdx initiative
- * vote               - Vote on a Blocknetdx initiative/budget
+ * vote-many          - Vote on a xc3 initiative
+ * vote-alias         - Vote on a xc3 initiative
+ * vote               - Vote on a xc3 initiative/budget
  * getvotes           - Show current servicenode budgets
  * getinfo            - Show current servicenode budgets
  * show               - Show all budgets

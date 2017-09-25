@@ -1,31 +1,31 @@
 #!/bin/bash
 #
-#  blocknetdxd The BlocknetDX core server.
+#  xc3dxd The xc3 core server.
 #
 #
 # chkconfig: 345 80 20
-# description: blocknetdxd
-# processname: blocknetdxd
+# description: xc3dxd
+# processname: xc3dxd
 #
 
 # Source function library.
 . /etc/init.d/functions
 
-# you can override defaults in /etc/sysconfig/blocknetdxd, see below
-if [ -f /etc/sysconfig/blocknetdxd ]; then
-        . /etc/sysconfig/blocknetdxd
+# you can override defaults in /etc/sysconfig/xc3dxd, see below
+if [ -f /etc/sysconfig/xc3dxd ]; then
+        . /etc/sysconfig/xc3dxd
 fi
 
 RETVAL=0
 
-prog=blocknetdxd
-# you can override the lockfile via BITCOIND_LOCKFILE in /etc/sysconfig/blocknetdxd
-lockfile=${BITCOIND_LOCKFILE-/var/lock/subsys/blocknetdxd}
+prog=xc3dxd
+# you can override the lockfile via BITCOIND_LOCKFILE in /etc/sysconfig/xc3dxd
+lockfile=${BITCOIND_LOCKFILE-/var/lock/subsys/xc3dxd}
 
-# blocknetdxd defaults to /usr/bin/blocknetdxd, override with BITCOIND_BIN
-bitcoind=${BITCOIND_BIN-/usr/bin/blocknetdxd}
+# xc3dxd defaults to /usr/bin/xc3dxd, override with BITCOIND_BIN
+bitcoind=${BITCOIND_BIN-/usr/bin/xc3dxd}
 
-# blocknetdxd opts default to -disablewallet, override with BITCOIND_OPTS
+# xc3dxd opts default to -disablewallet, override with BITCOIND_OPTS
 bitcoind_opts=${BITCOIND_OPTS}
 
 start() {

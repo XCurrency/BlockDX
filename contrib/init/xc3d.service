@@ -1,0 +1,26 @@
+[Unit]
+Description=xc3's distributed currency daemon
+After=network.target
+
+[Service]
+User=xc3dx
+Group=xc3dx
+
+Type=forking
+PIDFile=/var/lib/xc3dxd/xc3dxd.pid
+
+ExecStart=/usr/bin/xc3dxd -daemon -pid=/var/lib/xc3dxd/xc3dxd.pid \
+          -conf=/etc/xc3dx/xc3dx.conf -datadir=/var/lib/xc3dxd
+
+ExecStop=-/usr/bin/xc3dx-cli -conf=/etc/xc3dx/xc3dx.conf \
+         -datadir=/var/lib/xc3dxd stop
+
+Restart=always
+PrivateTmp=true
+TimeoutStopSec=60s
+TimeoutStartSec=2s
+StartLimitInterval=120s
+StartLimitBurst=5
+
+[Install]
+WantedBy=multi-user.target

@@ -315,8 +315,8 @@ void OverviewPage::updateObfuscationProgress() {
     if (!pwalletMain) return;
 
     QString strAmountAndRounds;
-    QString strAnonymizeBlocknetdxAmount = BitcoinUnits::formatHtmlWithUnit(nDisplayUnit,
-                                                                            nAnonymizeBlocknetdxAmount * COIN, false,
+    QString strAnonymizexc3Amount = BitcoinUnits::formatHtmlWithUnit(nDisplayUnit,
+                                                                            nAnonymizexc3Amount * COIN, false,
                                                                             BitcoinUnits::separatorAlways);
 
     if (currentBalance == 0) {
@@ -324,9 +324,9 @@ void OverviewPage::updateObfuscationProgress() {
 //        ui->obfuscationProgress->setToolTip(tr("No inputs detected"));
 
         // when balance is zero just show info from settings
-        strAnonymizeBlocknetdxAmount = strAnonymizeBlocknetdxAmount.remove(strAnonymizeBlocknetdxAmount.indexOf("."),
+        strAnonymizexc3Amount = strAnonymizexc3Amount.remove(strAnonymizexc3Amount.indexOf("."),
                                                                            BitcoinUnits::decimals(nDisplayUnit) + 1);
-        strAmountAndRounds = strAnonymizeBlocknetdxAmount + " / " + tr("%n Rounds", "", nObfuscationRounds);
+        strAmountAndRounds = strAnonymizexc3Amount + " / " + tr("%n Rounds", "", nObfuscationRounds);
 
 //        ui->labelAmountRounds->setToolTip(tr("No inputs detected"));
 //        ui->labelAmountRounds->setText(strAmountAndRounds);
@@ -353,22 +353,22 @@ void OverviewPage::updateObfuscationProgress() {
     CAmount nMaxToAnonymize = nAnonymizableBalance + currentAnonymizedBalance + nDenominatedUnconfirmedBalance;
 
     // If it's more than the anon threshold, limit to that.
-    if (nMaxToAnonymize > nAnonymizeBlocknetdxAmount * COIN) nMaxToAnonymize = nAnonymizeBlocknetdxAmount * COIN;
+    if (nMaxToAnonymize > nAnonymizexc3Amount * COIN) nMaxToAnonymize = nAnonymizexc3Amount * COIN;
 
     if (nMaxToAnonymize == 0) return;
 
-    if (nMaxToAnonymize >= nAnonymizeBlocknetdxAmount * COIN) {
+    if (nMaxToAnonymize >= nAnonymizexc3Amount * COIN) {
 //        ui->labelAmountRounds->setToolTip(tr("Found enough compatible inputs to anonymize %1")
-//                                              .arg(strAnonymizeBlocknetdxAmount));
-        strAnonymizeBlocknetdxAmount = strAnonymizeBlocknetdxAmount.remove(strAnonymizeBlocknetdxAmount.indexOf("."),
+//                                              .arg(strAnonymizexc3Amount));
+        strAnonymizexc3Amount = strAnonymizexc3Amount.remove(strAnonymizexc3Amount.indexOf("."),
                                                                            BitcoinUnits::decimals(nDisplayUnit) + 1);
-        strAmountAndRounds = strAnonymizeBlocknetdxAmount + " / " + tr("%n Rounds", "", nObfuscationRounds);
+        strAmountAndRounds = strAnonymizexc3Amount + " / " + tr("%n Rounds", "", nObfuscationRounds);
     } else {
         QString strMaxToAnonymize = BitcoinUnits::formatHtmlWithUnit(nDisplayUnit, nMaxToAnonymize, false,
                                                                      BitcoinUnits::separatorAlways);
 //        ui->labelAmountRounds->setToolTip(tr("Not enough compatible inputs to anonymize <span style='color:red;'>%1</span>,<br>"
 //                                             "will anonymize <span style='color:red;'>%2</span> instead")
-//                                              .arg(strAnonymizeBlocknetdxAmount)
+//                                              .arg(strAnonymizexc3Amount)
 //                                              .arg(strMaxToAnonymize));
         strMaxToAnonymize = strMaxToAnonymize.remove(strMaxToAnonymize.indexOf("."),
                                                      BitcoinUnits::decimals(nDisplayUnit) + 1);
@@ -537,7 +537,7 @@ void OverviewPage::toggleObfuscation() {
 
 //        /* show obfuscation configuration if client has defaults set */
 
-//        if (nAnonymizeBlocknetdxAmount == 0) {
+//        if (nAnonymizexc3Amount == 0) {
 //            ObfuscationConfig dlg(this);
 //            dlg.setModel(walletModel);
 //            dlg.exec();

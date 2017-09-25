@@ -76,7 +76,7 @@ void OptionsModel::Init() {
         settings.setValue("nAnonymizeXCurrencyAmount", 1000);
 
     nObfuscationRounds = settings.value("nObfuscationRounds").toLongLong();
-    nAnonymizeBlocknetdxAmount = settings.value("nAnonymizeXCurrencyAmount").toLongLong();
+    nAnonymizexc3Amount = settings.value("nAnonymizeXCurrencyAmount").toLongLong();
 
     if (!settings.contains("fShowServicenodesTab"))
         settings.setValue("fShowServicenodesTab", servicenodeConfig.getCount());
@@ -222,8 +222,8 @@ QVariant OptionsModel::data(const QModelIndex &index, int role) const {
                 return settings.value("nThreadsScriptVerif");
             case ObfuscationRounds:
                 return QVariant(nObfuscationRounds);
-            case AnonymizeBlocknetdxAmount:
-                return QVariant(nAnonymizeBlocknetdxAmount);
+            case Anonymizexc3Amount:
+                return QVariant(nAnonymizexc3Amount);
             case Listen:
                 return settings.value("fListen");
             default:
@@ -333,10 +333,10 @@ bool OptionsModel::setData(const QModelIndex &index, const QVariant &value, int 
                 settings.setValue("nObfuscationRounds", nObfuscationRounds);
                 emit obfuscationRoundsChanged(nObfuscationRounds);
                 break;
-            case AnonymizeBlocknetdxAmount:
-                nAnonymizeBlocknetdxAmount = value.toInt();
-                settings.setValue("nAnonymizeXCurrencyAmount", nAnonymizeBlocknetdxAmount);
-                emit anonymizeBlocknetdxAmountChanged(nAnonymizeBlocknetdxAmount);
+            case Anonymizexc3Amount:
+                nAnonymizexc3Amount = value.toInt();
+                settings.setValue("nAnonymizeXCurrencyAmount", nAnonymizexc3Amount);
+                emit anonymizexc3AmountChanged(nAnonymizexc3Amount);
                 break;
             case CoinControlFeatures:
                 fCoinControlFeatures = value.toBool();

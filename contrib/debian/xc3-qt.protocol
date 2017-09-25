@@ -1,6 +1,6 @@
 [Protocol]
-exec=blocknetdx-qt '%u'
-protocol=blocknetdx
+exec=xc3dx-qt '%u'
+protocol=xc3dx
 input=none
 output=none
 helper=true

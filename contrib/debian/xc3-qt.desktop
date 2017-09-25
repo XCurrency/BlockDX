@@ -1,0 +1,12 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=xc3
+Comment=xc3 P2P Cryptocurrency
+Comment[fr]=xc3, monnaie virtuelle cryptographique pair à pair
+Comment[tr]=xc3, eşten eşe kriptografik sanal para birimi
+Exec=xc3dx-qt %u
+Terminal=false
+Type=Application
+Icon=xc3dx128
+MimeType=x-scheme-handler/xc3dx;
+Categories=Office;Finance;

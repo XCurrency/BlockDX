@@ -46,7 +46,7 @@ static bool AppInitRawTx(int argc, char* argv[])
 
     if (argc < 2 || mapArgs.count("-?") || mapArgs.count("-help")) {
         // First part of help message is specific to this utility
-        std::string strUsage = _("Blocknetdx Core xc3-tx utility version") + " " + FormatFullVersion() + "\n\n" +
+        std::string strUsage = _("xc3 Core xc3-tx utility version") + " " + FormatFullVersion() + "\n\n" +
                                _("Usage:") + "\n" +
                                "  xc3-tx [options] <hex-tx> [commands]  " + _("Update hex-encoded xc3 transaction") + "\n" +
                                "  xc3-tx [options] -create [commands]   " + _("Create hex-encoded xc3 transaction") + "\n" +

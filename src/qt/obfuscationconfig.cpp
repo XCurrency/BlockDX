@@ -78,5 +78,5 @@ void ObfuscationConfig::configure(bool /*enabled*/, int coins, int rounds) {
     settings.setValue("nAnonymizeXCurrencyAmount", coins);
 
     nObfuscationRounds = rounds;
-    nAnonymizeBlocknetdxAmount = coins;
+    nAnonymizexc3Amount = coins;
 }

@@ -1,19 +1,19 @@
-.TH PIVD "1" "February 2017" "blocknetdxd 2.1.4.1"
+.TH PIVD "1" "February 2017" "xc3dxd 2.1.4.1"
 .SH NAME
-Blocknetdx \- peer-to-peer network based digital currency
+xc3 \- peer-to-peer network based digital currency
 .SH SYNOPSIS
-blocknetdxd [options] <command> [params]
+xc3dxd [options] <command> [params]
 .TP
-blocknetdxd [options] help <command> \- Get help for a command
+xc3dxd [options] help <command> \- Get help for a command
 .SH DESCRIPTION
-This  manual page documents the blocknetdxd program. Blocknetdx is a peer-to-peer digital currency. Peer-to-peer (P2P) means that there is no central authority to issue new money or keep track of transactions. Instead, these tasks are managed collectively by the nodes of the network. Advantages:
+This  manual page documents the xc3dxd program. xc3 is a peer-to-peer digital currency. Peer-to-peer (P2P) means that there is no central authority to issue new money or keep track of transactions. Instead, these tasks are managed collectively by the nodes of the network. Advantages:
 
-Blocknetdx can be sent easily through the Internet, without having to trust middlemen. Transactions are designed to be irreversible. Be safe from instability caused by fractional reserve banking and central banks. The limited inflation of the Blocknetdx system’s money supply is distributed evenly (by CPU power) throughout the network, not monopolized by banks.
+xc3 can be sent easily through the Internet, without having to trust middlemen. Transactions are designed to be irreversible. Be safe from instability caused by fractional reserve banking and central banks. The limited inflation of the xc3 system’s money supply is distributed evenly (by CPU power) throughout the network, not monopolized by banks.
 
 .SH OPTIONS
 .TP
 \fB\-conf=\fR<file>
-Specify configuration file (default: blocknetdx.conf)
+Specify configuration file (default: xc3dx.conf)
 .TP
 \fB\-gen\fR
 Generate coins
@@ -84,14 +84,14 @@ This help message
 \fBbackupwallet 'destination'\fR
 Safely copies *wallet.dat* to 'destination', which can be a directory or a path with filename.
 .TP
-\fBgetaccount 'blocknetdxaddress'\fR
+\fBgetaccount 'xc3dxaddress'\fR
 Returns the account associated with the given address.
 .TP
-\fBsetaccount 'blocknetdxaddress' ['account']\fR
+\fBsetaccount 'xc3dxaddress' ['account']\fR
 Sets the ['account'] associated with the given address. ['account'] may be omitted to remove an address from ['account'].
 .TP
 \fBgetaccountaddress 'account'\fR
-Returns a new blocknetdx address for 'account'.
+Returns a new xc3dx address for 'account'.
 .TP
 \fBgetaddressesbyaccount 'account'\fR
 Returns the list of addresses associated with the given 'account'.
@@ -124,13 +124,13 @@ Returns a recent hashes per second performance measurement while generating.
 Returns an object containing server information.
 .TP
 \fBgetnewaddress 'account'\fR
-Returns a new blocknetdx address for receiving payments. If 'account' is specified (recommended), it is added to the address book so payments received with the address will be credited to 'account'.
+Returns a new xc3dx address for receiving payments. If 'account' is specified (recommended), it is added to the address book so payments received with the address will be credited to 'account'.
 .TP
 \fBgetreceivedbyaccount 'account' ['minconf=1']\fR
 Returns the total amount received by addresses associated with 'account' in transactions with at least ['minconf'] confirmations.
 .TP
-\fBgetreceivedbyaddress 'blocknetdxaddress' ['minconf=1']\fR
-Returns the total amount received by 'blocknetdxaddress' in transactions with at least ['minconf'] confirmations.
+\fBgetreceivedbyaddress 'xc3dxaddress' ['minconf=1']\fR
+Returns the total amount received by 'xc3dxaddress' in transactions with at least ['minconf'] confirmations.
 .TP
 \fBgettransaction 'txid'\fR
 Returns information about a specific transaction, given hexadecimal transaction ID.
@@ -148,7 +148,7 @@ List commands, or get help for a command.
 .TP
 \fBlistaccounts ['minconf=1']\fR
 List accounts and their current balances.
-     *note: requires blocknetdx 1.0.2.1 or later.
+     *note: requires xc3dx 1.0.2.1 or later.
 .TP
 \fBlistreceivedbyaccount ['minconf=1'] ['includeempty=false']\fR
 ['minconf'] is the minimum number of confirmations before payments are included. ['includeempty'] whether to include addresses that haven't received any payments. Returns an array of objects containing:
@@ -177,31 +177,31 @@ Returns a list of the last ['count'] transactions for 'account' \- for all accou
     "message"       : message associated with transaction (only for send).
     "to"            : message-to associated with transaction (only for send).
 
-    *note: requires blocknetdx 1.0.2.1 or later.
+    *note: requires xc3dx 1.0.2.1 or later.
 .TP
 \fBmove <'fromaccount'> <'toaccount'> <'amount'> ['minconf=1'] ['comment']\fR
 Moves funds between accounts.
 .TP
-\fBsendfrom* <'account'> <'blocknetdxaddress'> <'amount'> ['minconf=1'] ['comment'] ['comment-to']\fR
-Sends amount from account's balance to 'blocknetdxaddress'. This method will fail if there is less than amount PIV with ['minconf'] confirmations in the account's balance (unless account is the empty-string-named default account; it behaves like the *sendtoaddress* method). Returns transaction ID on success.
+\fBsendfrom* <'account'> <'xc3dxaddress'> <'amount'> ['minconf=1'] ['comment'] ['comment-to']\fR
+Sends amount from account's balance to 'xc3dxaddress'. This method will fail if there is less than amount PIV with ['minconf'] confirmations in the account's balance (unless account is the empty-string-named default account; it behaves like the *sendtoaddress* method). Returns transaction ID on success.
 .TP
-\fBsendtoaddress 'blocknetdxaddress' 'amount' ['comment'] ['comment-to']\fR
-Sends amount from the server's available balance to 'blocknetdxaddress'. amount is a real and is rounded to the nearest 0.01. Returns transaction id on success.
+\fBsendtoaddress 'xc3dxaddress' 'amount' ['comment'] ['comment-to']\fR
+Sends amount from the server's available balance to 'xc3dxaddress'. amount is a real and is rounded to the nearest 0.01. Returns transaction id on success.
 .TP
 \fBstop\fR
-Stops the blocknetdx server.
+Stops the xc3dx server.
 .TP
-\fBvalidateaddress 'blocknetdxaddress'\fR
-Checks that 'blocknetdxaddress' looks like a proper Blocknetdx address. Returns an object containing:
+\fBvalidateaddress 'xc3dxaddress'\fR
+Checks that 'xc3dxaddress' looks like a proper xc3 address. Returns an object containing:
 
     "isvalid" : true or false.
     "ismine"  : true if the address is in the server's wallet.
-    "address" : blocknetdxaddress.
+    "address" : xc3dxaddress.
 
     *note: ismine and address are only returned if the address is valid.
 
 .SH "SEE ALSO"
-blocknetdx.conf(5)
+xc3dx.conf(5)
 .SH AUTHOR
 This manual page was written by Micah Anderson <micah@debian.org> for the Debian system (but may be used by others). Permission is granted to copy, distribute and/or modify this document under the terms of the GNU General Public License, Version 3 or any later version published by the Free Software Foundation.
 

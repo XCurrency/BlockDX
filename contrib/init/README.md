@@ -1,10 +1,10 @@
 Sample configuration files for:
 
-SystemD: blocknetdxd.service
-Upstart: blocknetdxd.conf
-OpenRC:  blocknetdxd.openrc
-         blocknetdxd.openrcconf
-CentOS:  blocknetdxd.init
+SystemD: xc3dxd.service
+Upstart: xc3dxd.conf
+OpenRC:  xc3dxd.openrc
+         xc3dxd.openrcconf
+CentOS:  xc3dxd.init
 
 have been made available to assist packagers in creating node packages here.
 

@@ -1,21 +1,21 @@
 
 Debian
 ====================
-This directory contains files used to package blocknetdxd/blocknetdx-qt
-for Debian-based Linux systems. If you compile blocknetdxd/blocknetdx-qt yourself, there are some useful files here.
+This directory contains files used to package xc3dxd/xc3dx-qt
+for Debian-based Linux systems. If you compile xc3dxd/xc3dx-qt yourself, there are some useful files here.
 
-## blocknetdx: URI support ##
+## xc3dx: URI support ##
 
 
-blocknetdx-qt.desktop  (Gnome / Open Desktop)
+xc3dx-qt.desktop  (Gnome / Open Desktop)
 To install:
 
-	sudo desktop-file-install blocknetdx-qt.desktop
+	sudo desktop-file-install xc3dx-qt.desktop
 	sudo update-desktop-database
 
 If you build yourself, you will either need to modify the paths in
-the .desktop file or copy or symlink your blocknetdxqt binary to `/usr/bin`
-and the `../../share/pixmaps/blocknetdx128.png` to `/usr/share/pixmaps`
+the .desktop file or copy or symlink your xc3dxqt binary to `/usr/bin`
+and the `../../share/pixmaps/xc3dx128.png` to `/usr/share/pixmaps`
 
-blocknetdx-qt.protocol (KDE)
+xc3dx-qt.protocol (KDE)
 

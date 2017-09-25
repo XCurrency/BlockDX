@@ -2,24 +2,24 @@
 
 # backward compatibility for existing gentoo layout
 #
-if [ -d "/var/lib/blocknetdx/.blocknetdx" ]; then
-	BITCOIND_DEFAULT_DATADIR="/var/lib/blocknetdx/.blocknetdx"
+if [ -d "/var/lib/xc3dx/.xc3dx" ]; then
+	BITCOIND_DEFAULT_DATADIR="/var/lib/xc3dx/.xc3dx"
 else
-	BITCOIND_DEFAULT_DATADIR="/var/lib/blocknetdxd"
+	BITCOIND_DEFAULT_DATADIR="/var/lib/xc3dxd"
 fi
 
-BITCOIND_CONFIGFILE=${BITCOIND_CONFIGFILE:-/etc/blocknetdx/blocknetdx.conf}
-BITCOIND_PIDDIR=${BITCOIND_PIDDIR:-/var/run/blocknetdxd}
-BITCOIND_PIDFILE=${BITCOIND_PIDFILE:-${BITCOIND_PIDDIR}/blocknetdxd.pid}
+BITCOIND_CONFIGFILE=${BITCOIND_CONFIGFILE:-/etc/xc3dx/xc3dx.conf}
+BITCOIND_PIDDIR=${BITCOIND_PIDDIR:-/var/run/xc3dxd}
+BITCOIND_PIDFILE=${BITCOIND_PIDFILE:-${BITCOIND_PIDDIR}/xc3dxd.pid}
 BITCOIND_DATADIR=${BITCOIND_DATADIR:-${BITCOIND_DEFAULT_DATADIR}}
-BITCOIND_USER=${BITCOIND_USER:-blocknetdx}
-BITCOIND_GROUP=${BITCOIND_GROUP:-blocknetdx}
-BITCOIND_BIN=${BITCOIND_BIN:-/usr/bin/blocknetdxd}
+BITCOIND_USER=${BITCOIND_USER:-xc3dx}
+BITCOIND_GROUP=${BITCOIND_GROUP:-xc3dx}
+BITCOIND_BIN=${BITCOIND_BIN:-/usr/bin/xc3dxd}
 
-name="BlocknetDX Core Daemon"
-description="BlocknetDX crypto-currency p2p network daemon"
+name="xc3 Core Daemon"
+description="xc3 crypto-currency p2p network daemon"
 
-command="/usr/bin/blocknetdxd"
+command="/usr/bin/xc3dxd"
 command_args="-pid=\"${BITCOIND_PIDFILE}\" \
 		-conf=\"${BITCOIND_CONFIGFILE}\" \
 		-datadir=\"${BITCOIND_DATADIR}\" \
@@ -65,7 +65,7 @@ checkconfig()
 {
 	if ! grep -qs '^rpcpassword=' "${BITCOIND_CONFIGFILE}" ; then
 		eerror ""
-		eerror "ERROR: You must set a secure rpcpassword to run blocknetdxd."
+		eerror "ERROR: You must set a secure rpcpassword to run xc3dxd."
 		eerror "The setting must appear in ${BITCOIND_CONFIGFILE}"
 		eerror ""
 		eerror "This password is security critical to securing wallets "
@@ -78,7 +78,7 @@ checkconfig()
 		eerror "It is also recommended that you also set alertnotify so you are "
 		eerror "notified of problems:"
 		eerror ""
-		eerror "ie: alertnotify=echo %%s | mail -s \"Blocknetdx Alert\"" \
+		eerror "ie: alertnotify=echo %%s | mail -s \"xc3 Alert\"" \
 			"admin@foo.com"
 		eerror ""
 		return 1

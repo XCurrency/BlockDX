@@ -211,7 +211,7 @@ SOURCES += \
     src/validationinterface.cpp \
     src/wallet_ismine.cpp \
     src/qt/bip38tooldialog.cpp \
-    src/qt/blocknetdxstrings.cpp \
+    src/qt/xc3strings.cpp \
     src/qt/intro.cpp \
     src/qt/multisenddialog.cpp \
     src/qt/networkstyle.cpp \
@@ -615,8 +615,8 @@ SOURCES += \
     src/kernel.cpp
 
 RESOURCES += \
-    src/qt/blocknetdx.qrc \
-    src/qt/blocknetdx_locale.qrc
+    src/qt/xc3.qrc \
+    src/qt/xc3_locale.qrc
 
 FORMS += \
     src/qt/forms/coincontroldialog.ui \
@@ -654,7 +654,7 @@ CODECFORTR = UTF-8
 
 # for lrelease/lupdate
 # also add new translations to src/qt/bitcoin.qrc under translations/
-TRANSLATIONS = $$files(src/qt/locale/blocknetdx_*.ts)
+TRANSLATIONS = $$files(src/qt/locale/xc3_*.ts)
 
 isEmpty(QMAKE_LRELEASE) {
     win32:QMAKE_LRELEASE = $$[QT_INSTALL_BINS]\\lrelease.exe
@@ -675,7 +675,7 @@ OTHER_FILES += \
     doc/*.txt \
     doc/README \
     README.md \
-    res/blocknetdx-qt-res.rc \
+    res/xc3-qt-res.rc \
     configure.ac
 
 
@@ -710,7 +710,7 @@ isEmpty(BOOST_INCLUDE_PATH) {
 }
 
 windows:DEFINES += WIN32
-windows:RC_FILE = src/qt/res/blocknetdx-qt-res.rc
+windows:RC_FILE = src/qt/res/xc3-qt-res.rc
 
 windows:!contains(MINGW_THREAD_BUGFIX, 0) {
     # At least qmake's win32-g++-cross profile is missing the -lmingwthrd
@@ -732,8 +732,8 @@ macx:HEADERS += src/qt/macdockiconhandler.h src/qt/macnotificationhandler.h
 macx:OBJECTIVE_SOURCES += src/qt/macdockiconhandler.mm src/qt/macnotificationhandler.mm
 macx:LIBS += -framework Foundation -framework ApplicationServices -framework AppKit
 macx:DEFINES += MAC_OSX MSG_NOSIGNAL=0
-macx:ICON = src/qt/res/icons/blocknet.icns
-macx:TARGET = "blocknet-Qt"
+macx:ICON = src/qt/res/icons/xc3.icns
+macx:TARGET = "xc3-Qt"
 macx:QMAKE_CFLAGS_THREAD += -pthread
 macx:QMAKE_LFLAGS_THREAD += -pthread
 macx:QMAKE_CXXFLAGS_THREAD += -pthread

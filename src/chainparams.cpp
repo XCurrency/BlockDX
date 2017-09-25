@@ -1,7 +1,7 @@
 // Copyright (c) 2010 Satoshi Nakamoto
 // Copyright (c) 2009-2014 The Bitcoin developers
 // Copyright (c) 2014-2015 The Dash developers
-// Copyright (c) 2015-2017 The BlocknetDX developers
+// Copyright (c) 2015-2017 The xc3 developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -96,15 +96,15 @@ public:
         pchMessageStart[3] = 0xa3;
         vAlertPubKey = ParseHex("0452c91a00518fb8c6d38100341f88499554284d1ba75097cc25ae5a0d811835c63d2cb46c8855304bca81c452b63ce71fcb6897d06f8000450841f72602457f74");
         nDefaultPort = 41412;
-        bnProofOfWorkLimit = ~uint256() >> 20; // BlocknetDX starting difficulty is 1 / 2^12
+        bnProofOfWorkLimit = ~uint256() >> 20; // xc3 starting difficulty is 1 / 2^12
         nSubsidyHalvingInterval = 210000;
         nMaxReorganizationDepth = 100;
         nEnforceBlockUpgradeMajority = 750;
         nRejectBlockOutdatedMajority = 950;
         nToCheckBlockUpgradeMajority = 1000;
         nMinerThreads = 0;
-        nTargetTimespan = 1 * 60; // BlocknetDX: 1 day
-        nTargetSpacing = 1 * 60;  // BlocknetDX: 1 minute
+        nTargetTimespan = 1 * 60; // xc3: 1 day
+        nTargetSpacing = 1 * 60;  // xc3: 1 minute
         nLastPOWBlock = 2000;
         nMaturity = 100;
         nServicenodeCountDrift = 20;
@@ -151,7 +151,7 @@ public:
 	*/
         base58Prefixes[EXT_PUBLIC_KEY] = boost::assign::list_of(0x04)(0x88)(0xB2)(0x1E).convert_to_container<std::vector<unsigned char> >(); // xpub prefix
         base58Prefixes[EXT_SECRET_KEY] = boost::assign::list_of(0x04)(0x88)(0xAD)(0xE4).convert_to_container<std::vector<unsigned char> >(); // xprv prefix
-        // 	BIP44 coin type is from https://github.com/satoshilabs/slips/blob/master/slip-0044.md - TBD Blocknet
+        // 	BIP44 coin type is from https://github.com/satoshilabs/slips/blob/master/slip-0044.md - TBD xc3
         base58Prefixes[EXT_COIN_TYPE] = boost::assign::list_of(0x80)(0x00)(0x00)(0x148).convert_to_container<std::vector<unsigned char> >();
 
         convertSeed6(vFixedSeeds, pnSeed6_main, ARRAYLEN(pnSeed6_main));
@@ -199,8 +199,8 @@ public:
         nRejectBlockOutdatedMajority = 75;
         nToCheckBlockUpgradeMajority = 100;
         nMinerThreads = 0;
-        nTargetTimespan = 1 * 60; // BlocknetDX: 1 day
-        nTargetSpacing = 1 * 60;  // BlocknetDX: 1 minute
+        nTargetTimespan = 1 * 60; // xc3: 1 day
+        nTargetSpacing = 1 * 60;  // xc3: 1 minute
         nLastPOWBlock = 2000;
         nMaturity = 15;
         nModifierUpdateBlock = 51197; //approx Mon, 17 Apr 2017 04:00:00 GMT
@@ -271,8 +271,8 @@ public:
         nRejectBlockOutdatedMajority = 950;
         nToCheckBlockUpgradeMajority = 1000;
         nMinerThreads = 1;
-        nTargetTimespan = 24 * 60 * 60; // Blocknetdx: 1 day
-        nTargetSpacing = 1 * 60;        // Blocknetdx: 1 minutes
+        nTargetTimespan = 24 * 60 * 60; // xc3: 1 day
+        nTargetSpacing = 1 * 60;        // xc3: 1 minutes
         bnProofOfWorkLimit = ~uint256() >> 1;
         genesis.nTime = 1454124731;
         genesis.nBits = 0x207fffff;

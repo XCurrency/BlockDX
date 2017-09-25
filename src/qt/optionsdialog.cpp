@@ -214,7 +214,7 @@ void OptionsDialog::setMapper() {
 
     /* Obfuscation Rounds */
     mapper->addMapping(ui->obfuscationRounds, OptionsModel::ObfuscationRounds);
-    mapper->addMapping(ui->anonymizeXCurrency, OptionsModel::AnonymizeBlocknetdxAmount);
+    mapper->addMapping(ui->anonymizeXCurrency, OptionsModel::Anonymizexc3Amount);
     mapper->addMapping(ui->showServicenodesTab, OptionsModel::ShowServicenodesTab);
 }
 
