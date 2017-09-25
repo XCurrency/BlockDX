@@ -83,10 +83,10 @@ Value importprivkey(const Array& params, bool fHelp)
 {
     if (fHelp || params.size() < 1 || params.size() > 3)
         throw runtime_error(
-            "importprivkey \"blocknetdxprivkey\" ( \"label\" rescan )\n"
+            "importprivkey \"xc3privkey\" ( \"label\" rescan )\n"
             "\nAdds a private key (as returned by dumpprivkey) to your wallet.\n"
             "\nArguments:\n"
-            "1. \"blocknetdxprivkey\"   (string, required) The private key (see dumpprivkey)\n"
+            "1. \"xc3privkey\"   (string, required) The private key (see dumpprivkey)\n"
             "2. \"label\"            (string, optional, default=\"\") An optional label\n"
             "3. rescan               (boolean, optional, default=true) Rescan the wallet for transactions\n"
             "\nNote: This call can take minutes to complete if rescan is true.\n"
@@ -308,11 +308,11 @@ Value dumpprivkey(const Array& params, bool fHelp)
 {
     if (fHelp || params.size() != 1)
         throw runtime_error(
-            "dumpprivkey \"blocknetdxaddress\"\n"
-            "\nReveals the private key corresponding to 'blocknetdxaddress'.\n"
+            "dumpprivkey \"xc3address\"\n"
+            "\nReveals the private key corresponding to 'xc3address'.\n"
             "Then the importprivkey can be used with this output\n"
             "\nArguments:\n"
-            "1. \"blocknetdxaddress\"   (string, required) The blocknetdx address for the private key\n"
+            "1. \"xc3address\"   (string, required) The xc3 address for the private key\n"
             "\nResult:\n"
             "\"key\"                (string) The private key\n"
             "\nExamples:\n" +
@@ -396,10 +396,10 @@ Value bip38encrypt(const Array& params, bool fHelp)
 {
     if (fHelp || params.size() != 2)
         throw runtime_error(
-            "bip38encrypt \"blocknetdxaddress\"\n"
-            "\nEncrypts a private key corresponding to 'blocknetdxaddress'.\n"
+            "bip38encrypt \"xc3address\"\n"
+            "\nEncrypts a private key corresponding to 'xc3address'.\n"
             "\nArguments:\n"
-            "1. \"blocknetdxaddress\"   (string, required) The blocknetdx address for the private key (you must hold the key already)\n"
+            "1. \"xc3address\"   (string, required) The xc3 address for the private key (you must hold the key already)\n"
             "2. \"passphrase\"   (string, required) The passphrase you want the private key to be encrypted with - Valid special chars: !#$%&'()*+,-./:;<=>?`{|}~ \n"
             "\nResult:\n"
             "\"key\"                (string) The encrypted private key\n"
@@ -434,7 +434,7 @@ Value bip38decrypt(const Array& params, bool fHelp)
 {
     if (fHelp || params.size() != 2)
         throw runtime_error(
-            "bip38decrypt \"blocknetdxaddress\"\n"
+            "bip38decrypt \"xc3address\"\n"
             "\nDecrypts and then imports password protected private key.\n"
             "\nArguments:\n"
             "1. \"passphrase\"   (string, required) The passphrase you want the private key to be encrypted with\n"

@@ -786,7 +786,7 @@
     </message>
     <message>
         <location line="+11"/>
-        <source>Request payments (generates QR codes and blocknetdx: URIs)</source>
+        <source>Request payments (generates QR codes and xc3: URIs)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1082,7 +1082,7 @@ Address: %4
     </message>
     <message>
         <location filename="../blockexplorer.cpp" line="+498"/>
-        <source>Not all transactions will be shown. To view all transactions you need to set txindex=1 in the configuration file (blocknetdx.conf).</source>
+        <source>Not all transactions will be shown. To view all transactions you need to set txindex=1 in the configuration file (xc3.conf).</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2199,7 +2199,7 @@ Please check the address and try again.</source>
     <message>
         <location line="+21"/>
         <source>Language missing or translation incomplete? Help contributing translations here:
-https://www.transifex.com/blocknetdx-project/blocknetdx-project-translations</source>
+https://www.transifex.com/xc3-project/xc3-project-translations</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2693,7 +2693,7 @@ https://www.transifex.com/blocknetdx-project/blocknetdx-project-translations</so
     </message>
     <message>
         <location line="-118"/>
-        <source>Cannot start blocknetdx: click-to-pay handler</source>
+        <source>Cannot start xc3: click-to-pay handler</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -5000,9 +5000,9 @@ https://www.transifex.com/blocknetdx-project/blocknetdx-project-translations</so
     </message>
 </context>
 <context>
-    <name>blocknetdx-core</name>
+    <name>xc3-core</name>
     <message>
-        <location filename="../blocknetdxstrings.cpp" line="+12"/>
+        <location filename="../xc3strings.cpp" line="+12"/>
         <source>(1 = keep tx meta data e.g. account owner and payment request information, 2 = drop tx meta data)</source>
         <translation type="unfinished">(1 = keep tx meta data e.g. account owner and payment request information, 2 = drop tx meta data)</translation>
     </message>
@@ -5243,10 +5243,10 @@ https://www.transifex.com/blocknetdx-project/blocknetdx-project-translations</so
     </message>
     <message>
         <location line="+4"/>
-        <source>To use blocknetdxd, or the -server option to blocknetdx-qt, you must set an rpcpassword in the configuration file:
+        <source>To use xc3d, or the -server option to xc3-qt, you must set an rpcpassword in the configuration file:
 %s
 It is recommended you use the following random password:
-rpcuser=blocknetdxrpc
+rpcuser=xc3rpc
 rpcpassword=%s
 (you do not need to remember this password)
 The username and password MUST NOT be the same.

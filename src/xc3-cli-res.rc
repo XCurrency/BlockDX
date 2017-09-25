@@ -19,10 +19,10 @@ BEGIN
             VALUE "CompanyName",        "Blocknetdx"
             VALUE "FileDescription",    "Blocknetdx-cli (OSS RPC client for Blocknetdx)"
             VALUE "FileVersion",        VER_FILEVERSION_STR
-            VALUE "InternalName",       "blocknetdx-cli"
+            VALUE "InternalName",       "xc3-cli"
             VALUE "LegalCopyright",     COPYRIGHT_STR
             VALUE "LegalTrademarks1",   "Distributed under the MIT/X11 software license, see the accompanying file COPYING or http://www.opensource.org/licenses/mit-license.php."
-            VALUE "OriginalFilename",   "blocknetdx-cli.exe"
+            VALUE "OriginalFilename",   "xc3-cli.exe"
             VALUE "ProductName",        "Blocknetdx-cli"
             VALUE "ProductVersion",     VER_PRODUCTVERSION_STR
         END

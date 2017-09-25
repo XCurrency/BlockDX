@@ -5,7 +5,7 @@
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #if defined(HAVE_CONFIG_H)
-#include "config/blocknetdx-config.h"
+#include "config/xc3-config.h"
 #endif
 
 #include "bitcoingui.h"
@@ -253,7 +253,7 @@ private:
     void startThread();
 };
 
-#include "blocknetdx.moc"
+#include "xc3.moc"
 
 BitcoinCore::BitcoinCore() : QObject()
 {
@@ -536,8 +536,8 @@ int main(int argc, char* argv[])
     QTextCodec::setCodecForCStrings(QTextCodec::codecForTr());
 #endif
 
-    Q_INIT_RESOURCE(blocknetdx_locale);
-    Q_INIT_RESOURCE(blocknetdx);
+    Q_INIT_RESOURCE(xc3_locale);
+    Q_INIT_RESOURCE(xc3);
 
     BitcoinApplication app(argc, argv);
 #if QT_VERSION > 0x050100
@@ -581,7 +581,7 @@ int main(int argc, char* argv[])
     if (!Intro::pickDataDirectory())
         return 0;
 
-    /// 6. Determine availability of data directory and parse blocknetdx.conf
+    /// 6. Determine availability of data directory and parse xc3.conf
     /// - Do not call GetDataDir(true) before this step finishes
     if (!boost::filesystem::is_directory(GetDataDir(false))) {
         QMessageBox::critical(0, QObject::tr("BlocknetDX Core"),
@@ -638,7 +638,7 @@ int main(int argc, char* argv[])
         exit(0);
 
     // Start up the payment server early, too, so impatient users that click on
-    // blocknetdx: links repeatedly have their payment requests routed to this process:
+    // xc3: links repeatedly have their payment requests routed to this process:
     app.createPaymentServer();
 #endif
 

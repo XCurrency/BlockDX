@@ -56,8 +56,8 @@ Value obfuscation(const Array& params, bool fHelp)
 {
     if (fHelp || params.size() == 0)
         throw runtime_error(
-            "obfuscation <blocknetdxaddress> <amount>\n"
-            "blocknetdxaddress, reset, or auto (AutoDenominate)"
+            "obfuscation <xc3address> <amount>\n"
+            "xc3address, reset, or auto (AutoDenominate)"
             "<amount> is a real and will be rounded to the next 0.1" +
             HelpRequiringPassphrase());
 
@@ -78,8 +78,8 @@ Value obfuscation(const Array& params, bool fHelp)
 
     if (params.size() != 2)
         throw runtime_error(
-            "obfuscation <blocknetdxaddress> <amount>\n"
-            "blocknetdxaddress, denominate, or auto (AutoDenominate)"
+            "obfuscation <xc3address> <amount>\n"
+            "xc3address, denominate, or auto (AutoDenominate)"
             "<amount> is a real and will be rounded to the next 0.1" +
             HelpRequiringPassphrase());
 
@@ -141,7 +141,7 @@ Value servicenode(const Array& params, bool fHelp)
             "  genkey       - Generate new servicenodeprivkey\n"
             "  enforce      - Enforce servicenode payments\n"
             "  outputs      - Print servicenode compatible outputs\n"
-            "  start        - Start servicenode configured in blocknetdx.conf\n"
+            "  start        - Start servicenode configured in xc3.conf\n"
             "  start-alias  - Start single servicenode by assigned alias configured in servicenode.conf\n"
             "  start-<mode> - Start servicenodes configured in servicenode.conf (<mode>: 'all', 'missing', 'disabled')\n"
             "  status       - Print servicenode status information\n"

@@ -6,14 +6,14 @@
 #define CLIENTVERSIONCORE_H
 
 #if defined(HAVE_CONFIG_H)
-#include "config/blocknetdx-config.h"
+#include "config/xc3-config.h"
 #else
 
 /**
  * client versioning and copyright year
  */
 
-//! These need to be macros, as clientversion.cpp's and blocknetdx*-res.rc's voodoo requires it
+//! These need to be macros, as clientversion.cpp's and xc3*-res.rc's voodoo requires it
 #define CLIENT_VERSION_MAJOR 3
 #define CLIENT_VERSION_MINOR 6
 #define CLIENT_VERSION_REVISION 95

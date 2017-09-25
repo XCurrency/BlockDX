@@ -22,10 +22,10 @@ BEGIN
             VALUE "CompanyName",        "BlocknetDX"
             VALUE "FileDescription",    "BlocknetDX Core (OSS GUI client for BlocknetDX)"
             VALUE "FileVersion",        VER_FILEVERSION_STR
-            VALUE "InternalName",       "blocknetdx-qt"
+            VALUE "InternalName",       "xc3-qt"
             VALUE "LegalCopyright",     COPYRIGHT_STR
             VALUE "LegalTrademarks1",   "Distributed under the MIT/X11 software license, see the accompanying file COPYING or http://www.opensource.org/licenses/mit-license.php."
-            VALUE "OriginalFilename",   "blocknetdx-qt.exe"
+            VALUE "OriginalFilename",   "xc3-qt.exe"
             VALUE "ProductName",        "BlocknetDX Core"
             VALUE "ProductVersion",     VER_PRODUCTVERSION_STR
         END

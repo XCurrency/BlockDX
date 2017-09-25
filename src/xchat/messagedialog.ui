@@ -38,7 +38,7 @@
                                 <string/>
                             </property>
                             <property name="icon">
-                                <iconset resource="../qt/blocknetdx.qrc">
+                                <iconset resource="../qt/xc3.qrc">
                                     <normaloff>:/icons/editpaste</normaloff>:/icons/editpaste
                                 </iconset>
                             </property>
@@ -59,7 +59,7 @@
                                 <string/>
                             </property>
                             <property name="icon">
-                                <iconset resource="../qt/blocknetdx.qrc">
+                                <iconset resource="../qt/xc3.qrc">
                                     <normaloff>:/icons/address-book</normaloff>:/icons/address-book
                                 </iconset>
                             </property>
@@ -94,7 +94,7 @@
                                 <string/>
                             </property>
                             <property name="icon">
-                                <iconset resource="../qt/blocknetdx.qrc">
+                                <iconset resource="../qt/xc3.qrc">
                                     <normaloff>:/icons/address-book</normaloff>:/icons/address-book
                                 </iconset>
                             </property>
@@ -115,7 +115,7 @@
                                 <string/>
                             </property>
                             <property name="icon">
-                                <iconset resource="../qt/blocknetdx.qrc">
+                                <iconset resource="../qt/xc3.qrc">
                                     <normaloff>:/icons/editpaste</normaloff>:/icons/editpaste
                                 </iconset>
                             </property>
@@ -171,7 +171,7 @@
                                 <string/>
                             </property>
                             <property name="icon">
-                                <iconset resource="../qt/blocknetdx.qrc">
+                                <iconset resource="../qt/xc3.qrc">
                                     <normaloff>:/icons/editpaste</normaloff>:/icons/editpaste
                                 </iconset>
                             </property>
@@ -251,7 +251,7 @@
                                 <string>Clear &amp;All</string>
                             </property>
                             <property name="icon">
-                                <iconset resource="../qt/blocknetdx.qrc">
+                                <iconset resource="../qt/xc3.qrc">
                                     <normaloff>:/icons/remove</normaloff>:/icons/remove
                                 </iconset>
                             </property>
@@ -279,7 +279,7 @@
         </customwidget>
     </customwidgets>
     <resources>
-        <include location="../qt/blocknetdx.qrc"/>
+        <include location="../qt/xc3.qrc"/>
     </resources>
     <connections/>
 </ui>

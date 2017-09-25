@@ -17,13 +17,13 @@ BEGIN
         BLOCK "040904E4" // U.S. English - multilingual (hex)
         BEGIN
             VALUE "CompanyName",        "BlocknetDX"
-            VALUE "FileDescription",    "blocknetdxd (OSS daemon/client for Blocknetdx)"
+            VALUE "FileDescription",    "xc3d (OSS daemon/client for Blocknetdx)"
             VALUE "FileVersion",        VER_FILEVERSION_STR
-            VALUE "InternalName",       "blocknetdxd"
+            VALUE "InternalName",       "xc3d"
             VALUE "LegalCopyright",     COPYRIGHT_STR
             VALUE "LegalTrademarks1",   "Distributed under the MIT/X11 software license, see the accompanying file COPYING or http://www.opensource.org/licenses/mit-license.php."
-            VALUE "OriginalFilename",   "blocknetdxd.exe"
-            VALUE "ProductName",        "blocknetdxd"
+            VALUE "OriginalFilename",   "xc3d.exe"
+            VALUE "ProductName",        "xc3d"
             VALUE "ProductVersion",     VER_PRODUCTVERSION_STR
         END
     END
