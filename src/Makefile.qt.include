@@ -277,10 +277,10 @@ BITCOIN_QT_CPP = \
   qt/trafficgraphwidget.cpp \
   qt/utilitydialog.cpp \
   qt/winshutdownmonitor.cpp \
-  xchat/message.h \
-  xchat/message_db.h \
-  xchat/stored_pub_keys_db.h \
-  xchat/messagecrypter.h \
+  xchat/message.cpp \
+  xchat/message_db.cpp \
+  xchat/stored_pub_keys_db.cpp \
+  xchat/messagecrypter.cpp \
   xchat/messagesmodel.cpp \
   xchat/message_delegate.cpp \
   xchat/users_model.cpp \
@@ -322,10 +322,10 @@ BITCOIN_QT_CPP += \
   qt/walletmodel.cpp \
   qt/walletmodeltransaction.cpp \
   qt/walletview.cpp \
-  xchat/message.h \
-  xchat/message_db.h \
-  xchat/stored_pub_keys_db.h \
-  xchat/messagecrypter.h \
+  xchat/message.cpp \
+  xchat/message_db.cpp \
+  xchat/stored_pub_keys_db.cpp \
+  xchat/messagecrypter.cpp \
   xchat/messagesmodel.cpp \
   xchat/message_delegate.cpp \
   xchat/users_model.cpp \
