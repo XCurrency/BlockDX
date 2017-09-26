@@ -8,7 +8,7 @@
 #include "askpassphrasedialog.h"
 #include "bip38tooldialog.h"
 #include "bitcoingui.h"
-#include "xcurrencyexplorer.h"
+#include "blockexplorer.h"
 #include "clientmodel.h"
 #include "guiutil.h"
 #include "../servicenodeconfig.h"
