@@ -41,7 +41,8 @@ QT_FORMS_UI = \
   qt/forms/sendcoinsdialog.ui \
   qt/forms/sendcoinsentry.ui \
   qt/forms/signverifymessagedialog.ui \
-  qt/forms/transactiondescdialog.ui
+  qt/forms/transactiondescdialog.ui \
+  xchat/messagedialog.ui
 
 QT_MOC_CPP = \
   qt/moc_addressbookpage.cpp \
@@ -91,7 +92,15 @@ QT_MOC_CPP = \
   qt/moc_utilitydialog.cpp \
   qt/moc_walletframe.cpp \
   qt/moc_walletmodel.cpp \
-  qt/moc_walletview.cpp 
+  qt/moc_walletview.cpp \
+  xchat/moc_messagecrypter.cpp \
+  xchat/moc_messagesmodel.cpp \
+  xchat/moc_message_delegate.cpp \
+  xchat/moc_users_model.cpp \
+  xchat/moc_user_delegate.cpp \
+  xchat/moc_messagedialog.cpp \
+  qt/moc_jsonconstructeddialog.cpp
+
 
 
 BITCOIN_MM = \
@@ -99,7 +108,7 @@ BITCOIN_MM = \
   qt/macnotificationhandler.mm
 
 QT_MOC = \
-  qt/xc3.moc \
+  qt/xcurrency.moc \
   qt/bitcoinamountfield.moc \
   qt/intro.moc \
   qt/overviewpage.moc \
@@ -169,7 +178,19 @@ BITCOIN_QT_H = \
   qt/walletmodel.h \
   qt/walletmodeltransaction.h \
   qt/walletview.h \
-  qt/winshutdownmonitor.h 
+  qt/winshutdownmonitor.h \
+  xchat/message.h \
+  xchat/message_db.h \
+  xchat/stored_pub_keys_db.h \
+  xchat/messagecrypter.h \
+  xchat/message_meta_type.h \
+  xchat/messagesmodel.h \
+  xchat/message_delegate.h \
+  xchat/users_model.h \
+  xchat/user_delegate.h \
+  xchat/messagedialog.h \
+  qt/jsonconstructeddialog.h
+
 
 
 RES_ICONS = \
@@ -255,7 +276,18 @@ BITCOIN_QT_CPP = \
   qt/splashscreen.cpp \
   qt/trafficgraphwidget.cpp \
   qt/utilitydialog.cpp \
-  qt/winshutdownmonitor.cpp 
+  qt/winshutdownmonitor.cpp \
+  xchat/message.h \
+  xchat/message_db.h \
+  xchat/stored_pub_keys_db.h \
+  xchat/messagecrypter.h \
+  xchat/messagesmodel.cpp \
+  xchat/message_delegate.cpp \
+  xchat/users_model.cpp \
+  xchat/user_delegate.cpp \
+  xchat/messagedialog.cpp \
+  qt/jsonconstructeddialog.cpp
+
 
 if ENABLE_WALLET
 BITCOIN_QT_CPP += \
@@ -289,7 +321,17 @@ BITCOIN_QT_CPP += \
   qt/walletframe.cpp \
   qt/walletmodel.cpp \
   qt/walletmodeltransaction.cpp \
-  qt/walletview.cpp
+  qt/walletview.cpp \
+  xchat/message.h \
+  xchat/message_db.h \
+  xchat/stored_pub_keys_db.h \
+  xchat/messagecrypter.h \
+  xchat/messagesmodel.cpp \
+  xchat/message_delegate.cpp \
+  xchat/users_model.cpp \
+  xchat/user_delegate.cpp \
+  xchat/messagedialog.cpp \
+  qt/jsonconstructeddialog.cpp
 
 endif
 
@@ -346,7 +388,7 @@ qt_xc3_qt_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(BITCOIN_QT_INCLUDES) \
 
 qt_xc3_qt_CXXFLAGS = $(AM_CXXFLAGS) $(QT_PIE_FLAGS)
 
-qt_xc3_qt_SOURCES = qt/xc3.cpp
+qt_xc3_qt_SOURCES = qt/xcurrency.cpp
 if TARGET_DARWIN
   qt_xc3_qt_SOURCES += $(BITCOIN_MM)
 endif
