@@ -253,7 +253,7 @@ private:
     void startThread();
 };
 
-#include "xc3.moc"
+#include "xcurrency.moc"
 
 BitcoinCore::BitcoinCore() : QObject()
 {
