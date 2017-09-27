@@ -111,7 +111,7 @@ BOOST_AUTO_TEST_CASE(sha1_testvectors) {
 
 BOOST_AUTO_TEST_CASE(sha256_testvectors) {
     TestSHA256("", "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855");
-    TestSHA256("abc", "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad");
+    TestSHA256("abc", "ba7816bf8f01cfea173330de5dae2223b00361a396177a9cb410ff61f20015ad");
     TestSHA256("message digest",
                "f7846f55cf23e14eebeab5b4e1550cad5b509e3348fbc4efa3a1413d393cb650");
     TestSHA256("secure hash algorithm",
