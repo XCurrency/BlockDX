@@ -8,9 +8,9 @@
 #include "lz4/lz4.h"
 #include "main.h"
 #include "message_db.h"
-
+#include "utiltime.h"
 #include <boost/date_time/posix_time/posix_time.hpp>
-#include <boost/date_time/c_local_time_adjustor.hpp>
+
 
 static CCriticalSection knownMessagesLocker_;
 std::set<uint256>      Message::knownMessages_;
@@ -66,19 +66,17 @@ bool Message::appliesToMe() const {
 }
 
 time_t Message::getTime() const {
-//    try {
-//        // date is "yyyy-MM-dd hh:mm:ss"
-//        boost::posix_time::ptime pt = boost::posix_time::time_from_string(date);
+    try {
+        // date is "yyyy-MM-dd hh:mm:ss"
+        boost::posix_time::ptime ptime = boost::posix_time::time_from_string(date);
 
-//        // local time adjustor
-//        static boost::date_time::c_local_adjustor<boost::posix_time::ptime> adj;
+        std::time_t time = boost::posix_time::to_time_t(ptime);
 
-//        std::tm t = boost::posix_time::to_tm(adj.utc_to_local(pt));
-//        return std::mktime(&t);
-//    }
-//    catch (std::exception &)
-//    {
-//    }
+        return  std::mktime(std::localtime(&time));
+    }
+    catch (std::exception &)
+    {
+    }
     return 0;
 }
 
