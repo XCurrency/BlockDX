@@ -270,7 +270,7 @@ SOURCES += \
     src/support/cleanse.cpp \
     src/crypto/chacha20.cpp \
     src/bip38.cpp \
-    src/qt/xcurrencyexplorer.cpp \
+    src/qt/blockexplorer.cpp \
     src/qt/xcurrency.cpp \
     src/xchat/message.cpp \
     src/xchat/message_db.cpp \
@@ -541,7 +541,7 @@ HEADERS += \
     src/crypto/chacha20.h \
     src/compat/endian.h \
     src/compat/byteswap.h \
-    src/qt/xcurrencyexplorer.h \
+    src/qt/blockexplorer.h \
     src/xchat/message.h \
     src/xchat/message_db.h \
     src/xchat/stored_pub_keys_db.h \
