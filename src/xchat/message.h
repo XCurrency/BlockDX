@@ -1,11 +1,9 @@
 #ifndef MESSAGE_H
 #define MESSAGE_H
 
-#include "message.h"
 #include "../uint256.h"
 #include "../sync.h"
 #include "../key.h"
-
 #include <vector>
 #include <string>
 #include <set>
@@ -221,7 +219,7 @@ struct Message {
     bool isEmpty() const;
 
 private:
-    /*static */CCriticalSection &knownMessagesLocker_;
+//    static CCriticalSection &knownMessagesLocker_;
 
     static std::set<uint256> knownMessages_;
 

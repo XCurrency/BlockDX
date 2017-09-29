@@ -23,7 +23,7 @@
 #include "../xchat/messagedialog.h"
 
 #ifdef ENABLE_WALLET
-#include "xcurrencyexplorer.h"
+#include "blockexplorer.h"
 #include "walletframe.h"
 #include "walletmodel.h"
 #endif // ENABLE_WALLET

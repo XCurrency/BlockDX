@@ -84,7 +84,7 @@ ReceiveRequestDialog::ReceiveRequestDialog(QWidget *parent) : QDialog(parent),
                                                               model(0) {
     ui->setupUi(this);
 
-#ifndef USE_QRCODE
+#ifdef USE_QRCODE
     ui->btnSaveAs->setVisible(false);
     ui->lblQRCode->setVisible(false);
 #endif
@@ -136,7 +136,7 @@ void ReceiveRequestDialog::update() {
         html += "<b>" + tr("Message") + "</b>: " + GUIUtil::HtmlEscape(info.message) + "<br>";
     ui->outUri->setText(html);
 
-#ifndef USE_QRCODE
+#ifdef USE_QRCODE
     ui->lblQRCode->setText("");
     if (!uri.isEmpty()) {
         // limit URI length

@@ -1,4 +1,4 @@
-#include "xcurrencyexplorer.h"
+#include "blockexplorer.h"
 #include "bitcoinunits.h"
 #include "chainparams.h"
 #include "clientmodel.h"

@@ -339,7 +339,6 @@ libbitcoin_common_a_SOURCES = \
   spork.cpp \
   $(BITCOIN_CORE_H)
 
-  $(BITCOIN_CORE_H)
 
 
 # util: shared between all executables.
