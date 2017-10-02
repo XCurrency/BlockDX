@@ -82,6 +82,9 @@ private slots:
     /** Copy label of currently selected address entry to clipboard (no button) */
     void onCopyLabelAction();
 
+    /** Copy public key to clipboard for selected address entry */
+    void onCopyPublicKeyAction();
+
     /** Edit currently selected address entry (no button) */
     void onEditAction();
 

@@ -16,11 +16,27 @@
 #include "csvmodelwriter.h"
 #include "editaddressdialog.h"
 #include "guiutil.h"
+#include "optionsmodel.h"
+#include "csvmodelwriter.h"
+#ifdef USE_QRCODE
+#include "qrcodedialog.h"
+#endif
+#include "util/verify.h"
+#include "key.h"
+#include "base58.h"
+#include "wallet.h"
+#include "init.h"
+
+#include <QSortFilterProxyModel>
+#include <QClipboard>
+#include <QMessageBox>
+#include <QMenu>
 
 #include <QIcon>
 #include <QMenu>
 #include <QMessageBox>
 #include <QSortFilterProxyModel>
+#include <QGuiApplication>
 
 AddressBookPage::AddressBookPage(Mode mode, Tabs tab, QWidget *parent)
         : QDialog(parent),
@@ -100,26 +116,42 @@ AddressBookPage::AddressBookPage(Mode mode, Tabs tab, QWidget *parent)
     QAction *copyAddressAction = new QAction(tr("&Copy Address"), this);
     QAction *copyLabelAction = new QAction(tr("Copy &Label"), this);
     QAction *editAction = new QAction(tr("&Edit"), this);
+    QAction * copyPubKey          = new QAction(trUtf8("Copy public &key"), this);
     deleteAction = new QAction(ui->deleteAddress->text(), this);
 
     // Build context menu
     contextMenu = new QMenu();
     contextMenu->addAction(copyAddressAction);
     contextMenu->addAction(copyLabelAction);
+    contextMenu->addAction(copyPubKey);
     contextMenu->addAction(editAction);
-    if (tab == SendingTab)
+    if (tab == SendingTab){
         contextMenu->addAction(deleteAction);
+    }
     contextMenu->addSeparator();
 
     // Connect signals for context menu actions
-    connect(copyAddressAction, SIGNAL(triggered()), this, SLOT(on_copyAddress_clicked()));
-    connect(copyLabelAction, SIGNAL(triggered()), this, SLOT(onCopyLabelAction()));
-    connect(editAction, SIGNAL(triggered()), this, SLOT(onEditAction()));
-    connect(deleteAction, SIGNAL(triggered()), this, SLOT(on_deleteAddress_clicked()));
+    VERIFY(connect(copyAddressAction, SIGNAL(triggered()),
+                   this, SLOT(on_copyAddress_clicked())));
 
-    connect(ui->tableView, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(contextualMenu(QPoint)));
+    VERIFY(connect(copyLabelAction, SIGNAL(triggered()),
+                   this, SLOT(onCopyLabelAction())));
 
-    connect(ui->closeButton, SIGNAL(clicked()), this, SLOT(accept()));
+    VERIFY(connect(editAction, SIGNAL(triggered()),
+                   this, SLOT(onEditAction())));
+
+    VERIFY(connect(copyPubKey, SIGNAL(triggered()),
+                   this, SLOT(onCopyPublicKeyAction())));
+
+    VERIFY(connect(deleteAction, SIGNAL(triggered()),
+                   this, SLOT(on_deleteAddress_clicked())));
+
+    VERIFY(connect(ui->tableView, SIGNAL(customContextMenuRequested(QPoint)),
+                   this, SLOT(contextualMenu(QPoint))));
+
+    VERIFY(connect(ui->closeButton, SIGNAL(clicked()),
+                   this, SLOT(accept())));
+
 }
 
 AddressBookPage::~AddressBookPage() {
@@ -175,6 +207,63 @@ void AddressBookPage::on_copyAddress_clicked() {
 
 void AddressBookPage::onCopyLabelAction() {
     GUIUtil::copyEntryData(ui->tableView, AddressTableModel::Label);
+}
+
+void AddressBookPage::onCopyPublicKeyAction()
+{
+    if (!ui->tableView->selectionModel())
+    {
+        QMessageBox::warning(this, "", trUtf8("No selected rows"));
+        return;
+    }
+
+    QModelIndexList indexes = ui->tableView->selectionModel()->selectedRows(AddressTableModel::Address);
+    if (indexes.isEmpty())
+    {
+        QMessageBox::warning(this, "", trUtf8("No selected rows"));
+        return;
+    }
+
+    QModelIndex idx = indexes.at(0);
+    QString address = idx.data().toString();
+
+    CPubKey pubKey;
+
+    StoredPubKeysDb & keysDb = StoredPubKeysDb::instance();
+
+    // check stored key
+    if (keysDb.load(address.toStdString(), pubKey))
+    {
+        // found
+        QApplication::clipboard()->setText(QString::fromStdString(EncodeBase58(pubKey.Raw())));
+        return;
+    }
+
+    // not found stored key, check address
+    CBitcoinAddress addr(address.toStdString());
+    if (!addr.IsValid())
+    {
+        QMessageBox::warning(this, "", trUtf8("Invalid bitcoin address"));
+        return;
+    }
+
+    CKeyID id;
+    CKey key;
+    if (!addr.GetKeyID(id) || !pwalletMain->GetKey(id, key))
+    {
+        QMessageBox::information(this, "", trUtf8("Key not found"));
+        return;
+    }
+
+    pubKey = key.GetPubKey();
+    if (!pubKey.IsValid())
+    {
+        QMessageBox::information(this, "", trUtf8("Public key not found"));
+        return;
+    }
+
+    QApplication::clipboard()->setText(QString::fromStdString(EncodeBase58(pubKey.Raw())));
+
 }
 
 void AddressBookPage::onEditAction() {
