@@ -9,12 +9,25 @@
 #include "main.h"
 #include "message_db.h"
 #include "utiltime.h"
+#include "messagecrypter.h"
+#include "addressbookpage.h"
+#include "guiutil.h"
+#include "walletmodel.h"
+
+#include "bip38.h"
+#include "init.h"
+#include "wallet.h"
+
 #include <boost/date_time/posix_time/posix_time.hpp>
+#include <boost/date_time/c_local_time_adjustor.hpp>
 
 
-static CCriticalSection knownMessagesLocker_;
-std::set<uint256>      Message::knownMessages_;
 
+//*****************************************************************************
+//*****************************************************************************
+// static
+CCriticalSection Message::m_knownMessagesLocker;
+std::set<uint256>      Message::m_knownMessages;
 
 //*****************************************************************************
 //*****************************************************************************
@@ -43,86 +56,141 @@ uint256 Message::getStaticHash() const
                 encryptedData.begin(), encryptedData.end());
 }
 
-bool Message::appliesToMe() const {
+//*****************************************************************************
+//*****************************************************************************
+bool Message::appliesToMe() const
+{
     // check broadcast message
-    if (to.empty()) {
+    if (to.size() == 0)
+    {
         return true;
     }
 
-    CBitcoinAddress address(to);
-    if (!address.IsValid()) {
+    CBitcoinAddress addr(to);
+    if (!addr.IsValid())
+    {
         return false;
     }
 
     CKeyID id;
-    if (!address.GetKeyID(id)) {
+    if (!addr.GetKeyID(id))
+    {
         return false;
     }
 
-//    return pwalletMain->HaveKey(id);
+    if (!pwalletMain->HaveKey(id))
+    {
+        return false;
+    }
 
     return true;
-
 }
 
-time_t Message::getTime() const {
-    try {
+//*****************************************************************************
+//*****************************************************************************
+time_t Message::getTime() const
+{
+    try
+    {
         // date is "yyyy-MM-dd hh:mm:ss"
-        boost::posix_time::ptime ptime = boost::posix_time::time_from_string(date);
+        boost::posix_time::ptime pt = boost::posix_time::time_from_string(date);
 
-        std::time_t time = boost::posix_time::to_time_t(ptime);
+        // local time adjustor
+        static boost::date_time::c_local_adjustor<boost::posix_time::ptime> adj;
 
-        return  std::mktime(std::localtime(&time));
+        std::tm t = boost::posix_time::to_tm(adj.utc_to_local(pt));
+        return std::mktime(&t);
     }
+    //    catch (boost::bad_lexical_cast &)
+    //    {
+    //    }
     catch (std::exception &)
     {
     }
     return 0;
 }
 
-bool Message::isExpired() const {
+//*****************************************************************************
+//*****************************************************************************
+bool Message::isExpired() const
+{
     int secs = std::time(0) - getTime();
-//    // +-2 days
-    return (secs < -60 * 60 * 24 * 2) || (secs > 60 * 60 * 24 * 2);
 
-
+    // +-2 days
+    if (secs < -60*60*24*2 || secs > 60*60*24*2)
+    {
+        return true;
+    }
+    return false;
 }
 
-bool Message::send() {
+//*****************************************************************************
+//*****************************************************************************
+bool Message::send()
+{
     return broadcast();
 }
 
-bool Message::process(bool &isForMe) {
+//*****************************************************************************
+//*****************************************************************************
+bool Message::process(bool & isForMe)
+{
     isForMe = false;
 
-    if (appliesToMe()) {
+    if (appliesToMe())
+    {
         isForMe = true;
 
         {
-            LOCK(knownMessagesLocker_);
+            LOCK(m_knownMessagesLocker);
 
             uint256 hash = getHash();
-            if (knownMessages_.count(hash) > 0) {
+            if (m_knownMessages.count(hash) > 0)
+            {
                 // already received and processed
                 return true;
             }
-            knownMessages_.insert(hash);
+
+            m_knownMessages.insert(hash);
         }
+
         uiInterface.NotifyNewMessage(*this);
 
         // send message received
         LOCK(cs_vNodes);
-        BOOST_FOREACH(CNode *pnode, vNodes) {
-                        uint256 hash = getStaticHash();
-                        pnode->PushMessage("msgack", hash);
-                    }
+        BOOST_FOREACH(CNode * pnode, vNodes)
+        {
+            uint256 hash = getStaticHash();
+            pnode->PushMessage("msgack", hash);
+        }
     }
     return true;
-
-
 }
 
-bool Message::relayTo(CNode *pnode) const {
+//*****************************************************************************
+//*****************************************************************************
+// static
+bool Message::processReceived(const uint256 & hash)
+{
+    ChatDb & db = ChatDb::instance();
+
+    UndeliveredMap map;
+    if (db.loadUndelivered(map))
+    {
+        if (map.erase(hash))
+        {
+            // it is my message, return processed
+            db.saveUndelivered(map);
+            return true;
+        }
+    }
+    return false;
+}
+
+//*****************************************************************************
+//*****************************************************************************
+bool Message::relayTo(CNode * pnode) const
+{
     uint256 hash = getHash();
 
     // returns true if wasn't already contained in the set
@@ -134,59 +202,93 @@ bool Message::relayTo(CNode *pnode) const {
     return false;
 }
 
-bool Message::broadcast() const {
+//*****************************************************************************
+//*****************************************************************************
+bool Message::broadcast() const
+{
     LOCK(cs_vNodes);
-    BOOST_FOREACH(CNode *pnode, vNodes) {
-                    relayTo(pnode);
-                }
+    BOOST_FOREACH(CNode * pnode, vNodes)
+    {
+        relayTo(pnode);
+    }
 
-    return false;
+    return true;
 }
 
-bool Message::sign(CKey &key) {
+extern const std::string strMessageMagic;
+
+//*****************************************************************************
+//*****************************************************************************
+bool Message::sign(CKey & key)
+{
     signature.clear();
 
-    if (!key.IsValid()) {//TODO: add isNull method
-        // TODO alert
+    if (!key.IsValid())
+    {
+        // TODO
+        // alert
         return false;
     }
 
     CDataStream ss(SER_GETHASH, 0);
     ss << strMessageMagic << text;
 
-    if (!key.SignCompact(Hash(ss.begin(), ss.end()), signature)) {
-        // TODO alert
+    // std::vector<unsigned char> vchSig;
+    if (!key.SignCompact(Hash(ss.begin(), ss.end()), signature))
+    {
+        // TODO
+        // alert
         return false;
     }
+
     return true;
 }
 
-bool Message::encrypt(const CPubKey &senderPubKey) {
-    // TODO crypto
+//*****************************************************************************
+//*****************************************************************************
+//bool Message::verify(std::vector<unsigned char> sig)
+//{
+//    if (key.IsNull())
+//    {
+//        // TODO
+//        // alert
+//        return false;
+//    }
+
+//    CDataStream ss(SER_GETHASH, 0);
+//    ss << strMessageMagic << text;
+
+//    // std::vector<unsigned char> vchSig;
+//    if (!key.SignCompact(Hash(ss.begin(), ss.end()), signature))
+//    {
+//        // TODO
+//        // alert
+//        return false;
+//    }
+
+//    return true;
+//}
+
+
+//*****************************************************************************
+//*****************************************************************************
+bool Message::encrypt(const CPubKey & senderPubKey)
+{
+
     return true;
 }
 
-bool Message::decrypt(const CKey &_receiverKey, bool &isMessageForMy,
-                      CPubKey &senderPubKey) {
-    // TODO crypto
+//*****************************************************************************
+//*****************************************************************************
+bool Message::decrypt(const CKey & _receiverKey, bool & isMessageForMy,
+                      CPubKey & senderPubKey)
+{
     return true;
 }
 
-
-bool Message::isEmpty() const {
-    return encryptedData.empty();
+//*****************************************************************************
+//*****************************************************************************
+bool Message::isEmpty() const
+{
+    return encryptedData.size() == 0;
 }
-
-bool Message::processReceived(const uint256 &hash) {
-    ChatDb &db = ChatDb::instance();
-    UndeliveredMap map;
-    if (db.loadUndelivered(map)) {
-        if (map.erase(hash)) {
-            // it is my message, return processed
-            db.saveUndelivered(map);
-            return true;
-        }
-    }
-    return false;
-}
-

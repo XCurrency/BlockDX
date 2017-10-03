@@ -5,20 +5,22 @@
 
 //*****************************************************************************
 //*****************************************************************************
-class MessageDelegate : public QStyledItemDelegate {
-    enum {
+class MessageDelegate : public QStyledItemDelegate
+{
+    enum
+    {
         fontSizeForDate = 12,
         fontSizeForText = 14
     };
 
 public:
-    MessageDelegate() = default;
+    MessageDelegate();
 
     QSize sizeHint(const QStyleOptionViewItem &option,
-                   const QModelIndex &index) const override;
+                   const QModelIndex &index) const;
 
-    void paint(QPainter *painter, const QStyleOptionViewItem &option,
-               const QModelIndex &index) const override;
+    void paint(QPainter * painter, const QStyleOptionViewItem & option,
+               const QModelIndex & index) const;
 };
 
 

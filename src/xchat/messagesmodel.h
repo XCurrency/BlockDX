@@ -13,11 +13,13 @@
 
 //*****************************************************************************
 //*****************************************************************************
-class MessagesModel : public QAbstractListModel {
-Q_OBJECT
+class MessagesModel : public QAbstractListModel
+{
+    Q_OBJECT
 
 public:
-    enum {
+    enum
+    {
         roleMessage = Qt::UserRole,
         roleIncoming,
         roleDateTime,
@@ -25,29 +27,26 @@ public:
     };
 
 public:
-    explicit MessagesModel(QObject *parent = nullptr);
+    explicit MessagesModel(QObject *parent = 0);
 
 public:
-    virtual int rowCount(const QModelIndex &parent = QModelIndex()) const;
-
+    virtual int rowCount(const QModelIndex & parent = QModelIndex()) const;
     virtual QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
 
-    void loadMessages(vector<Message> &messages);
-
-    void addMessage(const Message &message);
-
+    void loadMessages(const std::vector<Message> & messages);
+    void addMessage(const Message & message);
     void clear();
 
-    const std::vector<Message> &plainData() const;
+    const std::vector<Message> & plainData() const;
 
 signals:
 
 public slots:
 
 private:
-    std::vector<Message> messages_;
-
+    std::vector<Message> m_messages;
 };
+
 
 
 #endif // MESSAGESMODEL_H

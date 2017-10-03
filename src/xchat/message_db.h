@@ -8,33 +8,35 @@
 #include <vector>
 #include <map>
 
-using UndeliveredMap = std::map<uint256, Message>;
+typedef std::map<uint256, Message> UndeliveredMap;
 
-class ChatDb : public CDB {
+//*****************************************************************************
+//*****************************************************************************
+class ChatDb : public CDB
+{
 protected:
-    ChatDb() : CDB("chat.dat", "rw") {}
+    ChatDb();
 
 public:
-    static ChatDb &instance();
+    static ChatDb & instance();
 
 public:
-    bool load(const std::string &address, std::vector<Message> &messages);
+    bool load(const std::string & address, std::vector<Message> & messages);
+    bool save(const std::string & address, const std::vector<Message> & messages);
+    bool erase(const std::string & address);
 
-    bool save(const std::string &address, const std::vector<Message> &messages);
+    bool loadUndelivered(UndeliveredMap & messages);
+    bool saveUndelivered(const UndeliveredMap & messages);
 
-    bool erase(const std::string &address);
-
-    bool loadUndelivered(UndeliveredMap &messages);
-
-    bool saveUndelivered(const UndeliveredMap &messages);
-
-    bool loadAddresses(std::vector<std::string> &addresses);
+    bool loadAddresses(std::vector<std::string> & addresses);
 
 private:
-    CCriticalSection criticalSection_;
+    CCriticalSection m_cs;
 
-    static std::string undelivered_;
-
+    static std::string m_undelivered;
 };
+
+//*****************************************************************************
+//*****************************************************************************
 
 #endif // MESSAGE_DB_H

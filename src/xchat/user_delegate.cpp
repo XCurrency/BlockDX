@@ -2,72 +2,79 @@
 #include "users_model.h"
 
 #include <QPainter>
+#include <QPainter>
+#include <QDebug>
 
 //*****************************************************************************
 //*****************************************************************************
+UserDelegate::UserDelegate()
+{
+}
 
 //*****************************************************************************
 //*****************************************************************************
-QSize UserDelegate::sizeHint(const QStyleOptionViewItem &option,
-                             const QModelIndex &index) const {
-
-    QRectF rect = option.rect;
+QSize UserDelegate::sizeHint(const QStyleOptionViewItem & option,
+                                      const QModelIndex & index) const
+{
+    QRectF  rect = option.rect;
     rect.adjust(8, 0, -8, 0);
 
     // calc size for label
     QRectF rectForLabel;
     {
-        auto label = index.data(UsersModel::roleLabel).toString();
+        QString label = index.data(UsersModel::roleLabel).toString();
 
-        QFont font;
-        font.setPixelSize(fontSizeForLabel);
+        QFont f;
+        f.setPixelSize(fontSizeForLabel);
 
-        QFontMetricsF fm(font);
+        QFontMetricsF fm(f);
         rectForLabel = fm.boundingRect(rect, Qt::AlignBottom, label);
     }
 
     // size for addr
-    QRectF rectForAddress;
+    QRectF rectForAddr;
     {
-        QString address = index.data(UsersModel::roleAddress).toString();
+        QString addr = index.data(UsersModel::roleAddress).toString();
 
-        QFont font;
-        font.setPixelSize(fontSizeForAddress);
+        QFont f;
+        f.setPixelSize(fontSizeForAddr);
 
-        QFontMetricsF fontMetricsF(font);
-        rectForAddress = fontMetricsF.boundingRect(rect, Qt::AlignBottom | Qt::TextWordWrap, address);
+        QFontMetricsF fm(f);
+        rectForAddr = fm.boundingRect(rect, Qt::AlignBottom | Qt::TextWordWrap, addr);
     }
 
 
     QSize size;// = QStyledItemDelegate::sizeHint(option, index);
 
-    size.setHeight(static_cast<int>(rectForLabel.height() + rectForAddress.height()));
-    size.setWidth(static_cast<int>(rect.width()));
+    size.setHeight(rectForLabel.height() + rectForAddr.height());
+    size.setWidth(rect.width());
 
     return size;
 }
 
 //*****************************************************************************
 //*****************************************************************************
-void UserDelegate::paint(QPainter *painter,
-                         const QStyleOptionViewItem &option,
-                         const QModelIndex &index) const {
-
+void UserDelegate::paint(QPainter * painter,
+                            const QStyleOptionViewItem & option,
+                            const QModelIndex & index) const
+{
     // QStyledItemDelegate::paint(painter, option, index);
 
-    if (!index.isValid()) {
+    if (!index.isValid())
+    {
         return;
     }
 
     QRect rect(option.rect);
 
-    auto isRead = index.data(UsersModel::roleIsRead).toBool();
-    auto label = index.data(UsersModel::roleLabel).toString();
-    auto address = index.data(UsersModel::roleAddress).toString();
+    bool isRead   = index.data(UsersModel::roleIsRead).toBool();
+    QString label = index.data(UsersModel::roleLabel).toString();
+    QString addr  = index.data(UsersModel::roleAddress).toString();
 
     // background
-    if (option.state & QStyle::State_Selected) {
-        QBrush bb(QColor(Qt::lightGray));
+    if (option.state & QStyle::State_Selected)
+    {
+        QBrush bb((QColor(Qt::lightGray)));
         painter->fillRect(rect, bb);
     }
 
@@ -80,7 +87,7 @@ void UserDelegate::paint(QPainter *painter,
     }
 
     // font size
-    auto font = painter->font();
+    QFont f = painter->font();
 
     // ajust rect
     rect.adjust(8, 0, -8, 0);
@@ -89,19 +96,19 @@ void UserDelegate::paint(QPainter *painter,
 
     // draw label
     {
-        font.setPixelSize(fontSizeForLabel);
-        painter->setFont(font);
+        f.setPixelSize(fontSizeForLabel);
+        painter->setFont(f);
         painter->drawText(rect, isRead ? label : ("* " + label));
     }
 
-    // draw address
+    // draw addr
     {
         painter->setPen(QColor(Qt::darkGray));
 
         rect.adjust(0, fontSizeForLabel, 0, 0);
 
-        font.setPixelSize(fontSizeForAddress);
-        painter->setFont(font);
-        painter->drawText(rect, address);
+        f.setPixelSize(fontSizeForAddr);
+        painter->setFont(f);
+        painter->drawText(rect, addr);
     }
 }

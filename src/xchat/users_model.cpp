@@ -6,75 +6,89 @@
 //*****************************************************************************
 //*****************************************************************************
 UsersModel::UsersModel(QObject *parent) :
-        QAbstractListModel(parent), addressTableModel_(nullptr) {
+    QAbstractListModel(parent)
+  , m_addrTableModel(0)
+{
 }
 
 //*****************************************************************************
 //*****************************************************************************
 // virtual
-int UsersModel::rowCount(const QModelIndex &parent) const {
+int UsersModel::rowCount(const QModelIndex & parent) const
+{
     Q_UNUSED(parent)
-    return static_cast<int>(items_.size());
+    return m_items.size();
 }
 
 //*****************************************************************************
 //*****************************************************************************
 // virtual
-QVariant UsersModel::data(const QModelIndex &index, int role) const {
-    auto row = static_cast<quint32>(index.row());
-    if (row >= items_.size()) {
+QVariant UsersModel::data(const QModelIndex &index, int role) const
+{
+    quint32 row = static_cast<quint32>(index.row());
+    if (row >= m_items.size())
+    {
         return QVariant();
     }
 
-    const Item &item = items_.at(row);
+    const Item & i = m_items.at(row);
 
-    QString address = QString::fromStdString(item.addr);
+    QString addr = QString::fromStdString(i.addr);
+    QString label = labelForAddressWithAddress(addr);
 
-    QString label = labelForAddressWithAddress(address);
-
-    switch (role) {
-        case Qt::DisplayRole:
-            return (!item.isRead_ ? "* " : "") + label;
-        case Qt::ToolTipRole:
-            return label;
-        case roleAddress:
-            return address;
-        case roleLabel:
-            return labelForAddress(address);
-        case roleIsRead:
-            return item.isRead_;
-        default:
-            return QVariant();
+    if (role == Qt::DisplayRole)
+    {
+        return (!i.isRead ? "* " : "") + label;
+    }
+    else if (role == Qt::ToolTipRole)
+    {
+        return label;
+    }
+    else if (role == roleAddress)
+    {
+        return addr;
+    }
+    else if (role == roleLabel)
+    {
+        return labelForAddress(addr);
+    }
+    else if (role == roleIsRead)
+    {
+        return i.isRead;
     }
 
+    return QVariant();
 }
 
 //*****************************************************************************
 //*****************************************************************************
-void UsersModel::loadAddresses(const std::vector<std::string> &addresses) {
+void UsersModel::loadAddresses(const std::vector<std::string> & addresses)
+{
     emit beginResetModel();
-    // items_ = addresses;
-    for (const auto &address : addresses) {
-        items_.emplace_back(address, true);
+    // m_items = addresses;
+    for (std::vector<std::string>::const_iterator i = addresses.begin(); i != addresses.end(); ++i)
+    {
+        m_items.push_back(Item(*i, true));
     }
     emit endResetModel();
 }
 
 //*****************************************************************************
 //*****************************************************************************
-void UsersModel::addAddress(const std::string &address, bool isNewMessage) {
+void UsersModel::addAddress(const std::string & address, bool isNewMessage)
+{
     emit beginResetModel();
-    items_.erase(std::remove(items_.begin(), items_.end(), address), items_.end());
-    items_.insert(items_.begin(), Item(address, !isNewMessage));
+    m_items.erase(std::remove(m_items.begin(), m_items.end(), address), m_items.end());
+    m_items.insert(m_items.begin(), Item(address, !isNewMessage));
     emit endResetModel();
 }
 
 //*****************************************************************************
 //*****************************************************************************
-void UsersModel::deleteAddress(const std::string &address) {
-
+void UsersModel::deleteAddress(const std::string & address)
+{
     emit beginResetModel();
-    items_.erase(std::remove(items_.begin(), items_.end(), address), items_.end());
+    m_items.erase(std::remove(m_items.begin(), m_items.end(), address), m_items.end());
     emit endResetModel();
 }
 
@@ -87,44 +101,51 @@ void UsersModel::deleteAddress(const std::string &address) {
 
 //*****************************************************************************
 //*****************************************************************************
-void UsersModel::onRead(const QModelIndex &index) {
-
-    if (!index.isValid()) {
+void UsersModel::onRead(const QModelIndex & index)
+{
+    if (!index.isValid())
+    {
         return;
     }
-    if (index.row() > items_.size()) {
+    if (index.row() > m_items.size())
+    {
         return;
     }
-    items_[index.row()].isRead_ = true;
+    m_items[index.row()].isRead = true;
     emit dataChanged(index, index);
 }
 
 //*****************************************************************************
 //*****************************************************************************
-void UsersModel::setAddressTableModel(AddressTableModel *model) {
-    addressTableModel_ = model;
+void UsersModel::setAddressTableModel(AddressTableModel * model)
+{
+    m_addrTableModel = model;
 }
 
 //*****************************************************************************
 //*****************************************************************************
-QString UsersModel::labelForAddress(const QString &address) const {
-
+QString UsersModel::labelForAddress(const QString & address) const
+{
     static const QString emptyLabel = trUtf8("(no label)");
 
-    if (!addressTableModel_) {
+    if (!m_addrTableModel)
+    {
         return emptyLabel;
     }
-    QString label = addressTableModel_->labelForAddress(address);
+
+    QString label = m_addrTableModel->labelForAddress(address);
     return label.isEmpty() ? emptyLabel : label;
 }
 
 //*****************************************************************************
 //*****************************************************************************
-QString UsersModel::labelForAddressWithAddress(const QString &address) const {
-    if (!addressTableModel_) {
+QString UsersModel::labelForAddressWithAddress(const QString & address) const
+{
+    if (!m_addrTableModel)
+    {
         return address;
     }
 
-    QString label = addressTableModel_->labelForAddress(address);
+    QString label = m_addrTableModel->labelForAddress(address);
     return label.isEmpty() ? address : label + '(' + address + ')';
 }

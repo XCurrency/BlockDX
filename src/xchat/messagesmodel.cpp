@@ -5,39 +5,54 @@
 
 #include <QDebug>
 
-//*****************************************************************************
-//*****************************************************************************
-MessagesModel::MessagesModel(QObject *parent) :
-        QAbstractListModel(parent) {}
 
 //*****************************************************************************
 //*****************************************************************************
-// virtual
-int MessagesModel::rowCount(const QModelIndex &parent) const {
-    Q_UNUSED(parent)
-    return static_cast<int>(messages_.size());
+MessagesModel::MessagesModel(QObject *parent) :
+    QAbstractListModel(parent)
+{
 }
 
 //*****************************************************************************
 //*****************************************************************************
 // virtual
-QVariant MessagesModel::data(const QModelIndex &index, int role) const {
-    auto row = static_cast<quint32>(index.row());
-    if (row >= messages_.size()) {
+int MessagesModel::rowCount(const QModelIndex & parent) const
+{
+    Q_UNUSED(parent)
+    return m_messages.size();
+}
+
+//*****************************************************************************
+//*****************************************************************************
+// virtual
+QVariant MessagesModel::data(const QModelIndex &index, int role) const
+{
+    quint32 row = static_cast<quint32>(index.row());
+    if (row >= m_messages.size())
+    {
         return QVariant();
     }
 
-    const Message &message = messages_[row];
-    if (role == Qt::DisplayRole) {
-        return QString::fromStdString(message.text);
-    } else if (role == roleMessage) {
-        return QVariant::fromValue(message);
-    } else if (role == roleIncoming) {
-        return message.appliesToMe();
-    } else if (role == roleDateTime) {
-        return QDateTime::fromTime_t(message.getTime());
-    } else if (role == roleDateTimeString) {
-        return QDateTime::fromTime_t(message.getTime()).toString("yyyy-MM-dd hh:mm:ss");
+    const Message & m = m_messages[row];
+    if (role == Qt::DisplayRole)
+    {
+        return QString::fromStdString(m.text);
+    }
+    else if (role == roleMessage)
+    {
+        return QVariant::fromValue(m);
+    }
+    else if (role == roleIncoming)
+    {
+        return m.appliesToMe();
+    }
+    else if (role == roleDateTime)
+    {
+        return QDateTime::fromTime_t(m.getTime());
+    }
+    else if (role == roleDateTimeString)
+    {
+        return QDateTime::fromTime_t(m.getTime()).toString("yyyy-MM-dd hh:mm:ss");
     }
 
     return QVariant();
@@ -45,32 +60,36 @@ QVariant MessagesModel::data(const QModelIndex &index, int role) const {
 
 //*****************************************************************************
 //*****************************************************************************
-void MessagesModel::loadMessages(vector<Message> &messages) {
+void MessagesModel::loadMessages(const std::vector<Message> & messages)
+{
     emit beginResetModel();
-    messages_ = std::move(messages);
-    std::sort(messages_.begin(), messages_.end());
+    m_messages = messages;
+    std::sort(m_messages.begin(), m_messages.end());
     emit endResetModel();
 }
 
 //*****************************************************************************
 //*****************************************************************************
-void MessagesModel::addMessage(const Message &message) {
-    auto size = messages_.size();
-    beginInsertRows(QModelIndex(), size, size + 1);
-    messages_.push_back(message);
+void MessagesModel::addMessage(const Message & message)
+{
+    size_t size = m_messages.size();
+    beginInsertRows(QModelIndex(), size, size+1);
+    m_messages.push_back(message);
     endInsertRows();
 }
 
 //*****************************************************************************
 //*****************************************************************************
-void MessagesModel::clear() {
+void MessagesModel::clear()
+{
     emit beginResetModel();
-    messages_.clear();
+    m_messages.clear();
     emit endResetModel();
 }
 
 //*****************************************************************************
 //*****************************************************************************
-const std::vector<Message> &MessagesModel::plainData() const {
-    return messages_;
+const std::vector<Message> & MessagesModel::plainData() const
+{
+    return m_messages;
 }
