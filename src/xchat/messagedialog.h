@@ -17,107 +17,88 @@
 #include <QMenu>
 
 #include <string>
-
 //*****************************************************************************
 //*****************************************************************************
 namespace Ui {
-    class MessagesDialog;
+class MessagesDialog;
 }
 
 class WalletModel;
 
-class WalletView;
-
 //*****************************************************************************
 //*****************************************************************************
-class MessagesDialog : public QDialog {
-Q_OBJECT
+class MessagesDialog : public QDialog
+{
+    Q_OBJECT
 
 public:
     explicit MessagesDialog(QWidget *parent = 0);
-
-    virtual ~MessagesDialog();
+    ~MessagesDialog();
 
 public:
-    void setWalletModel(WalletModel *model);
+    void setWalletModel(WalletModel * model);
 
-    void setFromAddress(const QString &address);
-
-    void setToAddress(const QString &address);
+    void setFromAddress(const QString & address);
+    void setToAddress(const QString & address);
 
 signals:
-
-    void newIncomingMessage(const QString &title, const QString &text);
+    void newIncomingMessage(const QString & title, const QString & text);
 
 public slots:
-
-    void showForAddress(const QString &address);
-
-    void incomingMessage(Message &message);
+    void showForAddress(const QString & address);
+    void incomingMessage(Message & message);
 
 private slots:
-
     void on_pasteButton_SM_clicked();
-
     void on_pasteButtonTo_SM_clicked();
-
     void on_pasteButtonPublicKey_SM_clicked();
-
     void on_addressBookButton_SM_clicked();
-
     void on_addressBookButtonTo_SM_clicked();
-
     void on_sendButton_SM_clicked();
-
     void on_clearButton_SM_clicked();
-
     void on_addresses_SM_clicked(const QModelIndex &index);
 
     void requestUndeliveredMessages();
 
     void onReadTimer();
 
-    void addressContextMenu(QPoint point);
+    void addrContextMenu(QPoint point);
 
 private:
     std::vector<std::string> getLocalAddresses() const;
 
-    bool loadMessages(const QString &address, std::vector<Message> &result);
+    bool loadMessages(const QString & address, std::vector<Message> & result);
+    void saveMessages(const QString & address, const std::vector<Message> & messages);
+    void clearMessages(const QString & address);
+    void pushToUndelivered(const Message & m);
 
-    void saveMessages(const QString &address, const std::vector<Message> &messages);
+    bool checkAddress(const std::string & address) const;
+    bool getKeyForAddress(const std::string & address, CKey & key) const;
+    bool signMessage(CKey & key, const std::string & message,
+                     std::vector<unsigned char> & signature) const;
 
-    void clearMessages(const QString &address);
-
-    void pushToUndelivered(const Message &message);
-
-    bool checkAddress(const std::string &address) const;
-
-    bool getKeyForAddress(const std::string &address, CKey &key) const;
-
-    bool signMessage(CKey &key, const std::string &message,
-                     std::vector<unsigned char> &signature) const;
-
-    bool resendUndelivered(const std::vector<std::string> &addresses);
+    bool resendUndelivered(const std::vector<std::string> & addresses);
 
 private:
-    Ui::MessagesDialog *ui;
+    Ui::MessagesDialog * ui;
 
-    ChatDb &chatDb_;
-    StoredPubKeysDb &keysDb_;
+    ChatDb             & m_db;
+    StoredPubKeysDb    & m_keys;
 
-    MessagesModel messagesModel_;
-    MessageDelegate messageDelegate_;
+    MessagesModel        m_model;
+    MessageDelegate      m_messageDelegate;
 
-    UsersModel usersModel;
-    UserDelegate userDelegate_;
+    UsersModel           m_users;
+    UserDelegate         m_userDelegate;
 
-    WalletModel *walletModel;
+    WalletModel        * m_walletModel;
 
-    QTimer readTimer_;
+    QTimer               m_readTimer;
 
-    QMenu userContextMenu_;
-    QAction *addToAddressBookAction_;
-    QAction *deleteAction_;
+    QMenu                m_userContextMenu;
+    QAction            * m_addToAddressBookAction;
+    QAction            * m_deleteAction;
 };
+
 
 #endif // MESSAGEDIALOG_H
